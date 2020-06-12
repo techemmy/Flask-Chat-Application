@@ -10,11 +10,11 @@ members = db.Table('members',
     db.Column('channel_id', db.Integer, db.ForeignKey('channels.id'), primary_key=True)
 )
 
-# messages = db.Table('messages',
-#     db.Column('message_id', db.Integer, db.ForeignKey('message.id'), primary_key=True),
-#     db.Column('channel_id', db.Integer, db.ForeignKey('channel.id'), primary_key=True),
-#     db.Column('user_id', db.Integer, db.ForeignKey('user.id'), primary_key=True),
-# )
+messages_relations = db.Table('messages_relations',
+    db.Column('message_id', db.Integer, db.ForeignKey('messages.id')),
+    db.Column('channel_id', db.Integer, db.ForeignKey('channels.id')),
+)
+
 
 class User(db.Model):
     """
@@ -62,18 +62,19 @@ class Channel(db.Model):
     channel_name = db.Column(db.String(20), nullable=False)
     member =  db.relationship('User', secondary=members, lazy='subquery', 
         backref=db.backref('members', lazy=True))
-    messages = db.Column(db.Text, nullable=True)
-    
-# class Message(db.Model):
-#     """
-#     Message Model for storing user messages in relation to their channels and
-#     the users.
-#     """
-#     __tablename__ = 'messages'
-#     id = db.column(db.Integer, primary_key=True)
-#     user_id = db.relationship('Channel')
 
-class Msg:
+class Message(db.Model):
+    """docstring for Message"""
+    __tablename__ = 'messages'
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(10), nullable=False)
+    timestamp = db.Column(db.String(10), nullable=False)
+    message = db.Column(db.Text, nullable=False)
+    channel = db.relationship('Channel', secondary=messages_relations, lazy='subquery',
+        backref=db.backref('messages_relations', lazy=True))
+        
+
+class MessageCreator:
     """
     Message function for adding messages to the Channel Class or channels table
     """
