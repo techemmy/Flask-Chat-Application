@@ -2,8 +2,8 @@
 
 {% block title %} Hook - Connect{% endblock %}
 
+{% block content %}
 <div>{% include 'main/navbar.html' %}</div>
-{% block body %}
 <div class="img-box"><img src="{{ url_for('static', filename='assets/hook1.png') }}" class="img-fluid" alt="Responsive image"></div>
     {% if session.logged_in %}
         <div>Logged In</div>
