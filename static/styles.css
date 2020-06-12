@@ -10,8 +10,8 @@ body {
   padding: 0;
   font-family: "Balsamiq Sans", cursive;
   box-sizing: border-box;
-  height: 100vh;
-  width: 100%;
+  /*height: auto;*/
+  width: auto;
   overflow-x: hidden;
 }
 
@@ -81,7 +81,7 @@ button.menu__button {
 }
 .menu-wrap.open {
   background: white;
-  width: max-content;
+  width: auto;
   height: 150px;
   border-radius: 0;
   border: 1px solid #ccc;
@@ -148,12 +148,6 @@ button.menu__button {
   color: rgba(12, 155, 83, 0.863);
 }
 
-.lists {
-  background-color: rgba(0, 0, 0, 0.8);
-  color: white;
-  padding: 50px;
-}
-
 .content {
   height: auto;
 }
@@ -165,6 +159,11 @@ hr.white {
   background: white;
 }
 
+div .lists {
+  background-color: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 50px;
+}
 div .lists a {
   cursor: pointer;
 }
@@ -210,24 +209,24 @@ div.msgs-content {
 div.msgs-content .msg-space {
   background: white;
   padding: 0;
-  margin: 0;
-  height: 600px;
+  height: auto;
 }
 div.msgs-content .msg-space .msg-gutter {
   width: 100%;
-  height: max-content;
+  height: auto;
   overflow: auto;
   padding: 30px;
 }
 div.msgs-content .msg-space .msg-gutter .msg-container {
   display: flex;
+  width: 100%;
 }
 div.msgs-content .msg-space .msg-gutter .msg-container .msg-info {
   background: #f1fdf9;
   padding: 0.9em;
   border: 1px solid rgba(0, 0, 0, 0.8);
   border-radius: 5px;
-  margin: 10px;
+  margin: 5px;
   height: 100px;
   width: 300px;
   display: -webkit-box;
@@ -246,40 +245,31 @@ div.msgs-content .msg-space .msg-gutter .msg-container .msg-info .msg-cont {
 div.msgs-content .send-space {
   background: rgba(0, 0, 0, 0.8);
   margin: 0;
-  height: 100px;
   padding: 20px;
-}
-div.msgs-content .send-space .input-fields {
   width: 100%;
-  flex-flow: row nowrap;
-  position: relative;
-  bottom: 0;
 }
-div.msgs-content .send-space .input-fields textarea,
-div.msgs-content .send-space .input-fields button {
+div.msgs-content .send-space textarea,
+div.msgs-content .send-space button {
   margin: 5px;
   border: 0;
 }
-div.msgs-content .send-space .input-fields textarea {
+div.msgs-content .send-space textarea {
   height: 50px;
   margin: 0 0 5px 0;
 }
-div.msgs-content .send-space .input-fields button.send {
-  border-radius: 50%;
-  display: contents;
+div.msgs-content .send-space a {
+  margin-left: 10px;
 }
-div.msgs-content .send-space .input-fields button img.send-img {
+div.msgs-content .send-space a img.send-img {
   background: rgba(12, 155, 83, 0.863);
   width: 50px;
   height: 50px;
   border: 0;
   border-radius: 50%;
-  margin-left: 10px;
-  transition: border 0.2s;
+  transition: border 0.1s;
 }
-div.msgs-content .send-space .input-fields button img.send-img:hover, div.msgs-content .send-space .input-fields button img.send-img:focus {
-  outline: invert;
-  border: 2px solid white;
+div.msgs-content .send-space a img.send-img:hover, div.msgs-content .send-space a img.send-img:focus {
+  border: 1px solid white;
 }
 
 /*# sourceMappingURL=styles.css.map */

@@ -17,8 +17,8 @@ body {
   padding: 0;
   font-family: $fonts;
   box-sizing: border-box;
-  height: 100vh;
-  width: 100%;
+  /*height: auto;*/
+  width: auto;
   overflow-x: hidden;
 }
 
@@ -88,7 +88,7 @@ button.menu__button {
   }
   &.open {
     background: white;
-    width: max-content;
+    width: auto;
     height: 150px;
     border-radius: 0;
     border: 1px solid #ccc;
@@ -157,12 +157,6 @@ button.menu__button {
   color: $primary-color;
 }
 
-.lists {
-  background-color: $secondary-color;
-  color: $white;
-  padding: 50px;
-}
-
 .content {
   height: auto;
 }
@@ -174,8 +168,15 @@ hr {
   }
 }
 
+div.lists, div.msgs-content {
+
+}
+
 div {
   .lists {
+    background-color: $secondary-color;
+    color: $white;
+    padding: 50px;
     a {
       cursor: pointer;
     }
@@ -226,21 +227,21 @@ div.msgs-content {
   .msg-space {
     background: $white;
     padding: 0;
-    margin: 0;
-    height: 600px;
+    height: auto;
     .msg-gutter {
       width: 100%;
-      height: max-content;
+      height: auto;
       overflow: auto;
       padding: 30px;
       .msg-container{
         display: flex;
+        width: 100%;
         .msg-info {
           background: $info-col;
           padding: .9em;
           border: 1px solid $secondary-color;
           border-radius: 5px;
-          margin: 10px;
+          margin: 5px;
           height: 100px;
           width: 300px;
           display: -webkit-box;
@@ -262,41 +263,31 @@ div.msgs-content {
   .send-space {
     background: $secondary-color;
     margin: 0;
-    height: 100px;
     padding: 20px;
-    .input-fields {
-      width: 100%;
-      flex-flow: row nowrap;
-      position: relative;
-      bottom: 0;
-      textarea,
-      button {
-        margin: 5px;
-        border: 0;
-      }
-      textarea {
-        height: 50px;
-        margin: 0 0 5px 0;
-      }
-      button {
-          &.send {
-              border-radius: 50%;
-              display: contents;
+    width: 100%;
+
+    textarea,
+    button {
+      margin: 5px;
+      border: 0;
+    }
+    textarea {
+      height: 50px;
+      margin: 0 0 5px 0;
+    }
+    a {
+      margin-left: 10px;
+      img.send-img {
+          background: $primary-color;
+          width: 50px;
+          height: 50px;
+          border: 0;
+          border-radius: 50%;
+          transition: border .1s;
+          &:hover, &:focus {
+              border: 1px solid $white;
           }
-        img.send-img {
-            background: $primary-color;
-            width: 50px;
-            height: 50px;
-            border: 0;
-            border-radius: 50%;
-            margin-left: 10px;
-            transition: border .2s;
-            &:hover, &:focus {
-                outline: invert;
-                border: 2px solid $white;
-            }
         }
       }
     }
   }
-}

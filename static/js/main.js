@@ -4,9 +4,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     document.querySelector('.signup').onclick = () => {
         $('#signup').modal('show');
-    };
+    }; 
+    
 });
-
 
 let menuButton = document.querySelector(".menu__button");
 let menuWrap = document.querySelector(".menu-wrap");
