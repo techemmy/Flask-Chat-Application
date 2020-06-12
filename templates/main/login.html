@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block title %} Hook - Connect{% endblock %}
+{% block loginStyle %}
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='login-static/style.css') }}">
+{% endblock %}
+{% block body %}
+<img class="wave" src="{{ url_for('static', filename='assets/wave.png') }}">
+<div class="container">
+    <div class="img">
+        <img src="{{ url_for('static', filename='assets/bg.svg') }}">
+    </div>
+    <div class="login-content">
+        <form action="{{ url_for('login') }}", method="POST">
+            <img src="{{ url_for('static', filename='assets/avatar.svg') }}">
+            <h3 class="title">Welcome Back</h3>
+               <div class="input-div one">
+                  <div class="i">
+                          <i class="fas fa-user"></i>
+                  </div>
+                  <div class="div">
+                          <h5>Username</h5>
+                          <input type="text" name="username" class="input" autocomplete="off" required aria-required="true">
+                  </div>
+               </div>
+               <div class="input-div pass">
+                  <div class="i"> 
+                       <i class="fas fa-lock"></i>
+                  </div>
+                  <div class="div">
+                       <h5>Password</h5>
+                       <input type="password" name="password" class="input" autocomplete="off"" required aria-required="true">
+               </div>
+            </div>
+            <a href="#">Forgot Password?</a>
+            <span>Don't have an account <a href="{{ url_for('sign_up') }}" style="display: inline;color: teal;">register.</a></span>
+            <input type="submit" class="btn" value="Login">
+        </form>
+    </div>
+</div>
+{% endblock %}
+{% block loginScript %}
+    <script src="{{ url_for('static', filename='login-static/script.js') }}"></script>
+{% endblock %}

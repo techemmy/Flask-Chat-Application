@@ -1,0 +1,285 @@
+@import url("https://fonts.googleapis.com/css2?family=Balsamiq+Sans&display=swap");
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Balsamiq Sans", cursive;
+  box-sizing: border-box;
+  height: 100vh;
+  width: 100%;
+  overflow-x: hidden;
+}
+
+nav {
+  background: rgba(0, 0, 0, 0.8);
+}
+nav .navbar-brand {
+  transition: color 0.2s ease-out;
+  cursor: pointer;
+  color: white;
+  font-size: xx-large;
+}
+nav .navbar-brand:hover {
+  color: rgba(12, 155, 83, 0.863);
+}
+nav div button {
+  margin: 10px;
+  color: white;
+}
+nav a {
+  color: white;
+}
+
+div.chat-head {
+  background: rgba(0, 0, 0, 0.8);
+}
+div.chat-head .chat-rep {
+  color: white;
+  margin-top: 20px;
+  padding-left: 50px;
+}
+div.chat-head .chat-rep:hover {
+  cursor: default;
+}
+
+button.menu__button {
+  background: transparent;
+  color: white;
+  font-size: 42px;
+  border: 0;
+  line-height: 40px;
+  transition: 0.2s;
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: block;
+  width: 50px;
+  outline: none;
+}
+
+.menu-wrap {
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  width: 50px;
+  height: 50px;
+  transition: 0.2s;
+  background: rgba(12, 155, 83, 0.863);
+  transition: 0.3s;
+  border-radius: 50%;
+  overflow: hidden;
+  z-index: 44;
+  cursor: pointer;
+}
+.menu-wrap:hover, .menu-wrap:focus {
+  border: 1px solid white;
+}
+.menu-wrap.open {
+  background: white;
+  width: max-content;
+  height: 150px;
+  border-radius: 0;
+  border: 1px solid #ccc;
+  padding: 12px 50px 30px 30px;
+  box-shadow: 0 2px 7px -2px rgba(0, 0, 0, 0.2);
+}
+.menu-wrap.open .menu__button {
+  outline: none;
+  color: #7b7b7d;
+  transform: rotate(45deg);
+}
+.menu-wrap.open .menu__list > li {
+  transition: 0.2s;
+  transform: translateX(20px);
+}
+.menu-wrap.open .menu__list > li:nth-child(1) {
+  transition-delay: 0.4s;
+}
+.menu-wrap.open .menu__list > li:nth-child(2) {
+  transition-delay: 0.5s;
+}
+.menu-wrap.open .menu {
+  opacity: 1;
+  margin-top: 5px;
+}
+
+.menu {
+  margin-top: 50px;
+  opacity: 0;
+  transition: 0.2s;
+}
+
+.menu__title {
+  margin: 0 0 8px 0;
+}
+
+.menu__list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.menu__list > li {
+  margin: 0 0 5px 0;
+  transform: translateX(30px);
+}
+
+.icon {
+  width: 18px;
+  height: 18px;
+  display: inline-block;
+  vertical-align: middle;
+  background: rgba(12, 155, 83, 0.863);
+  border-radius: 2px;
+  position: relative;
+  top: -1px;
+  margin: 0 4px 0 0;
+}
+
+.text-center {
+  margin: 0;
+}
+
+.log-user {
+  color: rgba(12, 155, 83, 0.863);
+}
+
+.lists {
+  background-color: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 50px;
+}
+
+.content {
+  height: auto;
+}
+
+hr {
+  width: 150px;
+}
+hr.white {
+  background: white;
+}
+
+div .lists a {
+  cursor: pointer;
+}
+div .lists li {
+  font-size: 1.5rem;
+}
+div .lists li:hover {
+  cursor: pointer;
+}
+div .lists .active-channel {
+  color: rgba(12, 155, 83, 0.863);
+}
+
+.channels-list,
+.dm-list {
+  list-style-type: none;
+  overflow-y: auto;
+  height: 150px;
+}
+
+h4.heads {
+  padding-bottom: 10px;
+  border-bottom: 2px solid white;
+}
+
+@media (max-width: 745px) {
+  h4.heads {
+    font-size: 1.3rem;
+  }
+
+  div .lists li {
+    font-size: 1rem;
+  }
+}
+div.img-box {
+  margin-left: 150px;
+}
+
+div.msgs-content {
+  padding: 0;
+  width: 100%;
+}
+div.msgs-content .msg-space {
+  background: white;
+  padding: 0;
+  margin: 0;
+  height: 600px;
+}
+div.msgs-content .msg-space .msg-gutter {
+  width: 100%;
+  height: max-content;
+  overflow: auto;
+  padding: 30px;
+}
+div.msgs-content .msg-space .msg-gutter .msg-container {
+  display: flex;
+}
+div.msgs-content .msg-space .msg-gutter .msg-container .msg-info {
+  background: #f1fdf9;
+  padding: 0.9em;
+  border: 1px solid rgba(0, 0, 0, 0.8);
+  border-radius: 5px;
+  margin: 10px;
+  height: 100px;
+  width: 300px;
+  display: -webkit-box;
+}
+div.msgs-content .msg-space .msg-gutter .msg-container .msg-info .msg-pic {
+  margin-right: 10px;
+}
+div.msgs-content .msg-space .msg-gutter .msg-container .msg-info .msg-pic img.msg-img {
+  margin-top: 10px;
+  width: 30px;
+  height: 30px;
+}
+div.msgs-content .msg-space .msg-gutter .msg-container .msg-info .msg-cont {
+  padding: 3px;
+}
+div.msgs-content .send-space {
+  background: rgba(0, 0, 0, 0.8);
+  margin: 0;
+  height: 100px;
+  padding: 20px;
+}
+div.msgs-content .send-space .input-fields {
+  width: 100%;
+  flex-flow: row nowrap;
+  position: relative;
+  bottom: 0;
+}
+div.msgs-content .send-space .input-fields textarea,
+div.msgs-content .send-space .input-fields button {
+  margin: 5px;
+  border: 0;
+}
+div.msgs-content .send-space .input-fields textarea {
+  height: 50px;
+  margin: 0 0 5px 0;
+}
+div.msgs-content .send-space .input-fields button.send {
+  border-radius: 50%;
+  display: contents;
+}
+div.msgs-content .send-space .input-fields button img.send-img {
+  background: rgba(12, 155, 83, 0.863);
+  width: 50px;
+  height: 50px;
+  border: 0;
+  border-radius: 50%;
+  margin-left: 10px;
+  transition: border 0.2s;
+}
+div.msgs-content .send-space .input-fields button img.send-img:hover, div.msgs-content .send-space .input-fields button img.send-img:focus {
+  outline: invert;
+  border: 2px solid white;
+}
+
+/*# sourceMappingURL=styles.css.map */

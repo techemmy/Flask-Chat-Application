@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+
+{% block title %} Hook - Chat{% endblock %}
+
+<div>{% include 'main/navbar.html' %}</div>
+
+{% block body %}
+<main>
+    <div class="row chat-head">
+        <h2 class="col-sm-10 chat-rep">{{ session.username }}</h2>
+        <div class="col-sm-2">
+            <div class="menu-wrap">
+                <button class="menu__button">
+                    +
+                </button>
+                <div class="menu">
+                    <div class="title"></div>
+                    <h4 class="menu__title">Add new</h4>
+                    <ul class="menu__list">
+                        <li>
+                            <span class="icon"></span>
+                            Channel
+                        </li>
+                        <li>
+                            <span class="icon"></span>
+                            Direct Message(DM)
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="content row mt-0">
+        <div class="col-sm-4 col-md-4 col-lg-3 lists">
+            <h5 class="active-channel">Active Channel</h5>
+            <h4 title="Channels" class="heads">Channel(s)</h4>
+            <ul class="channels-list">
+                <!-- LIST OF CHANNELS -->
+                <li class="channel">#general</li>
+            </ul>
+            <h4 title="Direct Messages" class="heads">Direct Message(s) (DM)</h4>
+            <ul class="dm-list">
+                <!-- LIST OF DM -->
+                <li class="dm">Friend</li>
+            </ul>
+        </div>
+        <div class="col-sm-8 col-md-8 col-lg-9 msgs-content">
+            <div class="msg-space row">
+                <div class="msg-gutter">
+                    <div class="msg-container">
+                        <div class="msg-info">
+                            <div class="msg-pic"><img src="{{ url_for('static', filename='assets/msg-img.png') }}" alt="user-image" class="msg-img"></div>
+                            <div class="msg-cont">
+                                <span class="msg-name">name</span>
+                                <span class="msg-time">time</span>
+                                <p class="msg-msg">message</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="msg-container">
+                        <div class="msg-info">
+                            <div class="msg-pic"><img src="{{ url_for('static', filename='assets/msg-img.png') }}" alt="user-image" class="msg-img"></div>
+                            <div class="msg-cont">
+                                <span class="msg-name">name</span>
+                                <span class="msg-time">time</span>
+                                <p class="msg-msg">message</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="msg-container">
+                        <div class="msg-info">
+                            <div class="msg-pic"><img src="{{ url_for('static', filename='assets/msg-img.png') }}" alt="user-image" class="msg-img"></div>
+                            <div class="msg-cont">
+                                <span class="msg-name">name</span>
+                                <span class="msg-time">time</span>
+                                <p class="msg-msg">message</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="send-space row">  
+                <form class="input-fields row">
+                    <textarea name="message" id="message" cols="30" rows="10" class="form-control col-sm-10" autocomplete="off"></textarea>
+                    <button type="submit" class="send col-sm-2"><img src="{{ url_for('static', filename='assets/send-img.png') }}" alt="send" class="send-img"></button>
+                </form>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock %}
+
