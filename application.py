@@ -6,19 +6,18 @@ from forms import SignUpForm
 from passlib.hash import sha256_crypt
 from functools import wraps
 
-from sqlalchemy import create_engine
-from sqlalchemy.orm import scoped_session, sessionmaker
 
 app = Flask(__name__)
-sess = Session()
 SECRET_KEY = os.urandom(32)
+app.config["SESSION_PERMANENT"] = False
+app.config["SESSION_TYPE"] = "filesystem"
 app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SECRET_KEY'] = SECRET_KEY
 db.init_app(app)
+Session(app)
 
 def main():
-    sess.init_app(app)
     db.create_all()
     
 
