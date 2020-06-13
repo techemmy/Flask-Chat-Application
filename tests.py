@@ -1,6 +1,6 @@
 import unittest
 from selenium import webdriver
-from models import User, Channel, Msg
+from models import User, Channel, Message, messages_relations, members
 
 driver = webdriver.Chrome()
 
