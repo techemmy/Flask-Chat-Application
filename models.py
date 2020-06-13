@@ -34,7 +34,7 @@ class User(db.Model):
         """
         Returns the user's username when the __str__ function is called.
         """
-        return f"Your username is {self.username}"
+        return f"Username :{self.username}"
 
     def add_user(firstname, lastname, username, email, password, terms):
         """ 
