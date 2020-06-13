@@ -8,8 +8,8 @@
     {% else %}
         <a class="navbar-brand" href="{{ url_for('index') }}">ChatMe</a>
         <div class="form-inline p-2">
-            <a href="{{ url_for('login') }}"><button type="button" class="btn btn-outline-success btn-lg m-1">Log In</button></a>
-            <button type="button" class="btn btn-outline-light btn-lg m-1 signup" data-toggle="modal" data-target="#signup">Sign Up</button>
+            <a href="{{ url_for('login') }}"><button type="button" class="btn btn-outline-success btn-lg m-1" id="login_btn">Log In</button></a>
+            <button type="button" class="btn btn-outline-light btn-lg m-1 signup" data-toggle="modal" data-target="#signup" id="signup_btn">Sign Up</button>
         </div>
     {% endif %}
 </nav>
