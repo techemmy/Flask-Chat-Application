@@ -1,7 +1,7 @@
 import unittest
 from selenium import webdriver
 from models import User, Channel, Message, messages_relations, members
-from application import app
+from application import create_app
 from flask import session
 
 driver = webdriver.Chrome("C:\Program Files\chromedriver.exe")
