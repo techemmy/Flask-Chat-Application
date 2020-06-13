@@ -2,7 +2,7 @@ import unittest
 from selenium import webdriver
 from models import User, Channel, Message, messages_relations, members
 
-driver = webdriver.Chrome()
+# driver = webdriver.Chrome()
 
 class AuthenticationTests(unittest.TestCase):
 	""" Tests for user authentication"""
