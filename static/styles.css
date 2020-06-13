@@ -10,7 +10,7 @@ body {
   padding: 0;
   font-family: "Balsamiq Sans", cursive;
   box-sizing: border-box;
-  /*height: auto;*/
+  height: 100vh;
   width: auto;
   overflow-x: hidden;
 }
@@ -149,14 +149,7 @@ button.menu__button {
 }
 
 .content {
-  height: auto;
-}
-
-hr {
-  width: 150px;
-}
-hr.white {
-  background: white;
+  height: max-content;
 }
 
 div .lists {
@@ -198,12 +191,7 @@ h4.heads {
     font-size: 1rem;
   }
 }
-div.img-box {
-  margin-left: 150px;
-}
-
 div.msgs-content {
-  padding: 0;
   width: 100%;
 }
 div.msgs-content .msg-space {
@@ -244,9 +232,10 @@ div.msgs-content .msg-space .msg-gutter .msg-container .msg-info .msg-cont {
 }
 div.msgs-content .send-space {
   background: rgba(0, 0, 0, 0.8);
-  margin: 0;
   padding: 20px;
   width: 100%;
+  position: absolute;
+  bottom: 0;
 }
 div.msgs-content .send-space textarea,
 div.msgs-content .send-space button {
