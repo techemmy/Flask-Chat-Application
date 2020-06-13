@@ -1,12 +1,16 @@
-from flask import Flask, render_template, request, url_for, redirect, flash, session
-from flask_session import Session
+from flask import Flask
 import os
-from models import db, User
-from forms import SignUpForm
-from passlib.hash import sha256_crypt
-from functools import wraps
+
 
 def create_app(test_config=None):
+    from flask import render_template, request, url_for, redirect, flash, session
+    from flask_session import Session
+    from models import db, User
+    from forms import SignUpForm
+    from passlib.hash import sha256_crypt
+    from functools import wraps
+
+
     app = Flask(__name__)
 
     SECRET_KEY = os.urandom(32)
