@@ -1,21 +1,19 @@
-from flask import Flask
+from flask import Flask, render_template, request, url_for, redirect, flash, session
 import os
+from flask_session import Session
+from models import db, User
+from forms import SignUpForm
+from passlib.hash import sha256_crypt
+from functools import wraps
 
 
 def create_app(test_config=None):
-    from flask import render_template, request, url_for, redirect, flash, session
-    from flask_session import Session
-    from models import db, User
-    from forms import SignUpForm
-    from passlib.hash import sha256_crypt
-    from functools import wraps
-
 
     app = Flask(__name__)
 
     SECRET_KEY = os.urandom(32)
 
-    app.config.from_mapping(
+    app.config.from_mapping(    
         SESSION_PERMANENT = False,
         SESSION_TYPE = "filesystem",
         SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URL'),
@@ -25,14 +23,10 @@ def create_app(test_config=None):
 
     if test_config is None:
         # load the app config from file if not testing
-        app.config.from_pyfile("application.py")
+        app.config.from_pyfile("config.py", silent=True)
     else:
         # if testing load app config on tests config
         app.config.from_mapping(test_config)
-
-    def main():
-        db.create_all()
-        
 
     def login_required(f):
     	@wraps(f)
@@ -144,6 +138,10 @@ def create_app(test_config=None):
     return app
 
 
+def main():
+    db.create_all()
+        
+
 if __name__ == "__main__":
-    with app.app_context():
+    with create_app().app_context():
         main()
