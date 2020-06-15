@@ -6,7 +6,6 @@ from models import db
 from selenium import webdriver
 
 
-driver = webdriver.Chrome()
 
 class AuthenticationTests(TestCase):
 	""" Tests for views of user authentication"""
