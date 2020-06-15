@@ -10,21 +10,21 @@ driver = webdriver.Chrome()
 
 class AuthenticationTests(TestCase):
 	""" Tests for views of user authentication"""
-	SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URL')
-	TESTING = True
+	# SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URL')
+	# TESTING = True
 			
-	def create_app(test_config):
-		test_config = {
-			'ENV': 'test'
-		}
-		return create_app(test_config)
+	# def create_app(test_config):
+	# 	test_config = {
+	# 		'ENV': 'test'
+	# 	}
+	# 	return create_app(test_config)
 
-	def setUp(self):
-		db.create_all()
+	# def setUp(self):
+	# 	db.create_all()
 
-	def tearDown(self):
-		db.session.remove()
-		db.drop_all()
+	# def tearDown(self):
+	# 	db.session.remove()
+	# 	db.drop_all()
 
 	def test_user_not_connected_homepage(self):
 		driver.get("localhost:5000")
