@@ -57,7 +57,7 @@ class Channel(db.Model):
                              backref=db.backref('members', lazy=True))
 
     def save(self):
-        """ saves channel and its data """
+        """ saves a channel and its data """
         db.session.add(self)
         db.session.commit()
 
