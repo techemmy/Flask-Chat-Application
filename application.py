@@ -111,7 +111,7 @@ def create_app(test_config=None):
     def login():
         """ verify if user exists in the database """
         try:
-            if request.method == 'POST':
+            if request.method == "POST":
                 # checks if user exists
                 username = request.form.get('username')
                 password = request.form.get('password')
@@ -129,7 +129,7 @@ def create_app(test_config=None):
                     flash("You are now logged in!")
                     return redirect(url_for('chat'))
                 else:
-                    flash("Invalid Login Details!")
+                    flash(f"Invalid Login Details!, {username}-{password}")
         except Exception as e:
             print(e)
 
@@ -164,6 +164,6 @@ def main():
 
 
 if __name__ == "__main__":
-    with create_app().app_context():
-        # initializes db on cli call
-        main()
+    create_app().app_context().push()
+    # initializes db on cli call
+    main()
