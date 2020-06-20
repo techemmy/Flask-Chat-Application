@@ -4,3 +4,4 @@ env
 run.sh
 flask_session
 test-backup.py
+tests/
