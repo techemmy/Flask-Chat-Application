@@ -116,10 +116,7 @@ def create_app(test_config=None):
                 username = request.form.get('username')
                 password = request.form.get('password')
                 u = User.query.filter_by(username=username).first()
-                try:
-                    v = sha256_crypt.verify(password, u.password)
-                except Exception as e:
-                    print(e)
+                v = sha256_crypt.verify(password, u.password)
                 if u and v:
                     # logs user in
                     print("Validated!")
@@ -131,7 +128,7 @@ def create_app(test_config=None):
                 else:
                     flash(f"Invalid Login Details!, {username}-{password}")
         except Exception as e:
-            print(e)
+            print('Error------>', e)
 
         return render_template('main/login.html')
 
