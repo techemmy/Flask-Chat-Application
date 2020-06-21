@@ -19,12 +19,16 @@ class AuthenticationTests(unittest.TestCase):
     """ Test for authentication """
     def setUp(self):
         """ Setup a blank test db before each test """
+        global app
         basedir = os.path.abspath(os.path.dirname(__file__))
+        hashed_pass = "password123"
         app = create_app({
                          'TESTING': True,
                          'ENV': 'test',
                          'SQLALCHEMY_DATABASE_URI': 'sqlite:///' +
-                         os.path.join(basedir, TEST_DB)
+                         os.path.join(basedir, TEST_DB),
+                         'USERNAME': 'Test',
+                         'PASSWORD': hashed_pass,
                          })
         self.app = app.test_client()
         app.app_context().push()
@@ -39,10 +43,33 @@ class AuthenticationTests(unittest.TestCase):
         self.assertEqual(request.status_code, 200)
 
     def test_registered_user(self):
+        """ tests if user is registered successfully before commiting """
         user = User(firstname="Test", lastname="Lase", username="User",
                     email="Email@gmail.com", password="nvmmme", terms=True)
         db.session.add(user)
         self.assertIn(user, db.session)
+
+    def login(self, username, password):
+        """ login helper function """
+        return self.app.post('/login/',
+                                 data={'username': username,
+                                       'password': password},
+                                 follow_redirects=True,
+                                 )
+
+    def logout(self):
+        """ logout helper function """
+        return self.app.get('/logout/', follow_redirects=True)
+
+    def test_login_logout(self):
+        """ test login and logout using helper functions """
+        request = self.login(app.config['USERNAME'],
+                             app.config['PASSWORD'])
+        self.assertEqual(request.status_code, 200)
+        self.assertIn(b'You are now logged in!', request.data)
+        request = self.logout()
+        self.assertEqual(request.status_code, 200)
+        self.assertIn(b'You logged out successfully!', request.data)
 
 
 if __name__ == '__main__':
