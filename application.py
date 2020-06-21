@@ -44,8 +44,22 @@ def create_app(test_config=None):
                 return redirect(url_for('login'))
         return wrap
 
+    def logout_required(f):
+        """ user logout check wrapper """
+        @wraps(f)
+        def wrapped_view(*args, **kwargs):
+            """ checks if user not in session """
+            if not session.get('logged_in'):
+                return f(*args, **kwargs)
+            else:
+                # if user in session redirects to chat
+                flash('You are need to logout first.')
+                return redirect(url_for('chat'))
+        return wrapped_view
+
     @app.route('/<path:urlpath>/')
     @app.route('/', methods=['POST', 'GET'])
+    @logout_required
     def index(urlpath='/'):
         """ homepage for all non-registered users """
         # if user not in session, form pop's up
@@ -53,6 +67,7 @@ def create_app(test_config=None):
         return render_template('main/home.html', form=form)
 
     @app.route('/sign-up/', methods=['POST', 'GET'])
+    @logout_required
     def sign_up():
         """ registers user on post request """
         form = SignUpForm()
@@ -93,6 +108,7 @@ def create_app(test_config=None):
         return render_template('main/home.html', form=form)
 
     @app.route('/login/', methods=['POST', 'GET'])
+    @logout_required
     def login():
         """ verify if user exists in the database """
         try:
@@ -107,7 +123,6 @@ def create_app(test_config=None):
                     print("Validated!")
                     session["logged_in"] = True
                     session["username"] = u.username
-                    print(session["logged_in"], session["username"])
                     flash("You are now logged in!")
                     return redirect(url_for('chat'))
                 else:
