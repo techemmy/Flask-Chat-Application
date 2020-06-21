@@ -128,6 +128,7 @@ def create_app(test_config=None):
                 else:
                     flash(f"Invalid Login Details!, {username}-{password}")
         except Exception as e:
+            flash('Check your credentials and try again!')
             print('Error------>', e)
 
         return render_template('main/login.html')
