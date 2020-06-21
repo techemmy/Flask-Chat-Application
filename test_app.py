@@ -69,6 +69,12 @@ class AuthenticationTests(unittest.TestCase):
         request = self.logout()
         self.assertIn(b'You logged out successfully!', request.data)
 
+    def test_invalid_login(self):
+    	""" test invalid login using helper function """
+    	request = self.login(app.config['USERNAME'] + 'x',
+                             app.config['PASSWORD'] + 'X')
+    	self.assertIn(b'Check your credentials and try again!', request.data)
+
 
 if __name__ == '__main__':
     unittest.main()
