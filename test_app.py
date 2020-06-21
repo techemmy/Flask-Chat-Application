@@ -75,6 +75,11 @@ class AuthenticationTests(unittest.TestCase):
                              app.config['PASSWORD'] + 'X')
     	self.assertIn(b'Check your credentials and try again!', request.data)
 
+    def test_login_required_wrapper(self):
+    	""" test if the login required wrapper works """
+    	request = self.logout()
+    	self.assertIn(b'You need to login first', request.data)
+
 
 if __name__ == '__main__':
     unittest.main()
