@@ -7,6 +7,5 @@ script:
   - flake8 application.py
   - flake8 models.py
   - flake8 forms.py
-  - flake8 test_app.py
   - python test_app.py
 
