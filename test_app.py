@@ -65,10 +65,8 @@ class AuthenticationTests(unittest.TestCase):
         """ test login and logout using helper functions """
         request = self.login(app.config['USERNAME'],
                              app.config['PASSWORD'])
-        self.assertEqual(request.status_code, 200)
         self.assertIn(b'You are now logged in!', request.data)
         request = self.logout()
-        self.assertEqual(request.status_code, 200)
         self.assertIn(b'You logged out successfully!', request.data)
 
 
