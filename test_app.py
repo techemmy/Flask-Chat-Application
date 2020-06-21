@@ -1,6 +1,7 @@
 import unittest
 import os
 from application import create_app
+from models import db, User
 
 TEST_DB = 'test.db'
 
@@ -26,6 +27,22 @@ class AuthenticationTests(unittest.TestCase):
                          os.path.join(basedir, TEST_DB)
                          })
         self.app = app.test_client()
+        app.app_context().push()
+        db.create_all()
+
+    def tearDown(self):
+        db.session.remove()
+
+    def test_homepage(self):
+        """ test user not connected page """
+        request = self.app.get("/")
+        self.assertEqual(request.status_code, 200)
+
+    def test_registered_user(self):
+        user = User(firstname="Test", lastname="Lase", username="User",
+                    email="Email@gmail.com", password="nvmmme", terms=True)
+        db.session.add(user)
+        self.assertIn(user, db.session)
 
 
 if __name__ == '__main__':
