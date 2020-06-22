@@ -21,6 +21,7 @@ let toggleMenu = () => {
     menuWrap.classList.toggle("open");
 };
 
-// let toggleTimer = setInterval(() => {
-//     toggleMenu();
-// }, 2000);
+let toggleTimer = setInterval(() => {
+    toggleMenu();
+}, 2000);
+
