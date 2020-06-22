@@ -37,7 +37,7 @@ def create_app(test_config=None):
         @wraps(f)
         def wrap(*args, **kwargs):
             """ checks if user in session """
-            if session.get('logged_in'):
+            if session.get('user'):
                 return f(*args, **kwargs)
             else:
                 flash("You need to login first")
@@ -49,7 +49,7 @@ def create_app(test_config=None):
         @wraps(f)
         def wrapped_view(*args, **kwargs):
             """ checks if user not in session """
-            if not session.get('logged_in'):
+            if not session.get('user'):
                 return f(*args, **kwargs)
             else:
                 # if user in session redirects to chat
@@ -121,8 +121,7 @@ def create_app(test_config=None):
                 if u and v:
                     # logs user in
                     print("Validated!")
-                    session["logged_in"] = True
-                    session["username"] = u.username
+                    session["user"] = u
                     flash("You are now logged in!")
                     return redirect(url_for('chat'))
                 else:
