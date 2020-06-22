@@ -125,7 +125,7 @@ def create_app(test_config=None):
                     flash("You are now logged in!")
                     return redirect(url_for('chat'))
                 else:
-                    flash(f"Invalid Login Details!")
+                    flash("Invalid Login Details!")
         except Exception as e:
             flash('Check your credentials and try again!')
             print('Error------>', e)
