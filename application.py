@@ -53,7 +53,7 @@ def create_app(test_config=None):
                 return f(*args, **kwargs)
             else:
                 # if user in session redirects to chat
-                flash('You are need to logout first.')
+                flash('You need to logout first.')
                 return redirect(url_for('chat'))
         return wrapped_view
 
@@ -126,7 +126,7 @@ def create_app(test_config=None):
                     flash("You are now logged in!")
                     return redirect(url_for('chat'))
                 else:
-                    flash(f"Invalid Login Details!, {username}-{password}")
+                    flash(f"Invalid Login Details!")
         except Exception as e:
             flash('Check your credentials and try again!')
             print('Error------>', e)
