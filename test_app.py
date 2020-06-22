@@ -90,7 +90,7 @@ class AuthenticationTests(unittest.TestCase):
                              app.config['PASSWORD'])
         request = self.login(app.config['USERNAME'],
                              app.config['PASSWORD'])
-        self.assertIn(b'You are need to logout first.', request.data)
+        self.assertIn(b'You need to logout first.', request.data)
 
 
 if __name__ == '__main__':
