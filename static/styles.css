@@ -5,12 +5,9 @@
   padding: 0;
 }
 
-body, html {
+html {
   width: 100%;
   height: 100%;
-  position: relative;
-  left: 0;
-  right: 0;
 }
 
 body {
@@ -43,11 +40,12 @@ nav a {
 
 div.chat-head {
   background: rgba(0, 0, 0, 0.8);
+  margin: 0;
 }
 div.chat-head .chat-rep {
   color: white;
   margin-top: 20px;
-  padding-left: 50px;
+  padding-left: 30px;
 }
 div.chat-head .chat-rep:hover {
   cursor: default;
@@ -82,7 +80,7 @@ button.menu__button {
   z-index: 44;
   cursor: pointer;
 }
-.menu-wrap:hover, .menu-wrap:focus {
+.menu-wrap:hover {
   border: 1px solid white;
 }
 .menu-wrap.open {
@@ -161,13 +159,14 @@ button.menu__button {
 div .lists {
   background-color: rgba(0, 0, 0, 0.8);
   color: white;
-  padding: 50px;
+  padding: 10px 20px 10px 40px;
+  width: unset;
 }
 div .lists a {
   cursor: pointer;
 }
 div .lists li {
-  font-size: 1.5rem;
+  font-size: 1.3rem;
 }
 div .lists li:hover {
   cursor: pointer;
@@ -199,17 +198,17 @@ h4.heads {
 }
 div.msgs-content {
   width: 100%;
+  /*  height: auto;*/
 }
 div.msgs-content .msg-space {
   background: white;
   padding: 0;
-  height: auto;
 }
 div.msgs-content .msg-space .msg-gutter {
+  margin: 0;
   width: 100%;
-  height: auto;
   overflow: auto;
-  padding: 30px;
+  padding: 20px;
 }
 div.msgs-content .msg-space .msg-gutter .msg-container {
   display: flex;
@@ -236,26 +235,26 @@ div.msgs-content .msg-space .msg-gutter .msg-container .msg-info .msg-pic img.ms
 div.msgs-content .msg-space .msg-gutter .msg-container .msg-info .msg-cont {
   padding: 3px;
 }
-div.msgs-content .send-space {
-  background: rgba(0, 0, 0, 0.8);
-  padding: 20px;
+div.msgs-content .msg-space .send-space {
   width: 100%;
   position: absolute;
   bottom: 0;
+  margin-left: 20px;
 }
-div.msgs-content .send-space textarea,
-div.msgs-content .send-space button {
+div.msgs-content .msg-space .send-space textarea,
+div.msgs-content .msg-space .send-space button {
   margin: 5px;
   border: 0;
 }
-div.msgs-content .send-space textarea {
+div.msgs-content .msg-space .send-space textarea {
   height: 50px;
   margin: 0 0 5px 0;
+  width: 100%;
 }
-div.msgs-content .send-space a {
+div.msgs-content .msg-space .send-space a {
   margin-left: 10px;
 }
-div.msgs-content .send-space a img.send-img {
+div.msgs-content .msg-space .send-space a img.send-img {
   background: rgba(12, 155, 83, 0.863);
   width: 50px;
   height: 50px;
@@ -263,7 +262,7 @@ div.msgs-content .send-space a img.send-img {
   border-radius: 50%;
   transition: border 0.1s;
 }
-div.msgs-content .send-space a img.send-img:hover, div.msgs-content .send-space a img.send-img:focus {
+div.msgs-content .msg-space .send-space a img.send-img:hover, div.msgs-content .msg-space .send-space a img.send-img:focus {
   border: 1px solid white;
 }
 
