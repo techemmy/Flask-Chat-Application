@@ -1,6 +1,5 @@
-/*@import url("https://fonts.googleapis.com/css2?family=Balsamiq+Sans&display=swap");
-*/
-/*$fonts: "Balsamiq Sans", cursive;*/
+
+$fonts: Candara;
 $primary-color: rgba(12, 155, 83, 0.863);
 $secondary-color: rgba(0, 0, 0, 0.8);
 $white: white;
@@ -16,7 +15,7 @@ $info-col: rgb(241, 253, 249);
 body {
   margin: 0;
   padding: 0;
-  /*font-family: $fonts;*/
+  font-family: $fonts, sans-serif;
   box-sizing: border-box;
   overflow-x: hidden;
   height: 100vh;
