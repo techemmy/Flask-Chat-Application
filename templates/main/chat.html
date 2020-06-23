@@ -45,7 +45,7 @@
         </div>
         <div class="col-sm-8 col-md-8 col-lg-9 msgs-content">
             <div class="msg-space row">
-                <div class="msg-gutter">
+                <div class="msg-gutter row">
                     <div class="msg-container">
                         <div class="msg-info">
                             <div class="msg-pic"><img src="{{ url_for('static', filename='assets/msg-img.png') }}" alt="user-image" class="msg-img"></div>
@@ -66,21 +66,11 @@
                             </div>
                         </div>
                     </div>
-                    <div class="msg-container">
-                        <div class="msg-info">
-                            <div class="msg-pic"><img src="{{ url_for('static', filename='assets/msg-img.png') }}" alt="user-image" class="msg-img"></div>
-                            <div class="msg-cont">
-                                <span class="msg-name">name</span>
-                                <span class="msg-time">time</span>
-                                <p class="msg-msg">message</p>
-                            </div>
-                        </div>
-                    </div>
                 </div>
-            </div>
-            <div class="send-space row">  
-                <textarea name="message" id="message" cols="30" rows="10" class="form-control col-sm-10" autocomplete="off"></textarea>
-                <a href=""><img src="{{ url_for('static', filename='assets/send-img.png') }}" alt="send" class="send-img"></a>
+                <div class="send-space row">
+                    <textarea name="message" id="message" cols="30" rows="10" class="form-control col-sm-10" autocomplete="off"></textarea>
+                    <a href=""><img src="{{ url_for('static', filename='assets/send-img.png') }}" alt="send" class="send-img"></a>
+                </div>
             </div>
         </div>
     </div>
