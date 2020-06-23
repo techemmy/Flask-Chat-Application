@@ -14,7 +14,7 @@ let menuWrap = document.querySelector(".menu-wrap");
 menuButton.addEventListener("click", () => {
     console.log("clicked")
     toggleMenu();
-    // clearInterval(toggleTimer);
+    clearInterval(toggleTimer);
 });
 
 let toggleMenu = () => {
