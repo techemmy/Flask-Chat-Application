@@ -166,3 +166,5 @@ if __name__ == "__main__":
     create_app().app_context().push()
     # initializes db on cli call
     main()
+
+# TODO: start working on the chat engine
