@@ -59,10 +59,12 @@ def create_app(test_config=None):
 
     @app.route('/<path:urlpath>/')
     @app.route('/', methods=['POST', 'GET'])
-    @logout_required
+    # @logout_required
     def index(urlpath='/'):
         """ homepage for all non-registered users """
         # if user not in session, form pop's up
+        if session.get('user'):
+            return redirect(url_for('chat'))
         form = SignUpForm()
         return render_template('main/home.html', form=form)
 
