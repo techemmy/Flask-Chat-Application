@@ -1,6 +1,6 @@
-@import url("https://fonts.googleapis.com/css2?family=Balsamiq+Sans&display=swap");
-
-$fonts: "Balsamiq Sans", cursive;
+/*@import url("https://fonts.googleapis.com/css2?family=Balsamiq+Sans&display=swap");
+*/
+/*$fonts: "Balsamiq Sans", cursive;*/
 $primary-color: rgba(12, 155, 83, 0.863);
 $secondary-color: rgba(0, 0, 0, 0.8);
 $white: white;
@@ -12,18 +12,14 @@ $info-col: rgb(241, 253, 249);
   padding: 0;
 }
 
-html {
-  width: 100%;
-  height: 100%;
-
-}
 
 body {
   margin: 0;
   padding: 0;
-  font-family: $fonts;
+  /*font-family: $fonts;*/
   box-sizing: border-box;
   overflow-x: hidden;
+  height: 100vh;
 }
 
 nav {
@@ -162,7 +158,6 @@ button.menu__button {
 }
 
 .content {
-  /*height: max-content;*/
 }
 
 div.lists, div.msgs-content {
@@ -216,8 +211,8 @@ h4.heads {
 
 
 div.msgs-content {
+  padding-bottom: 70px;
   width: 100%;
-/*  height: auto;*/
   .msg-space {
     background: $white;
     padding: 0;
