@@ -10,7 +10,6 @@ body {
   font-family: Candara, sans-serif;
   box-sizing: border-box;
   overflow-x: hidden;
-  height: 100vh;
 }
 
 nav {
@@ -31,6 +30,13 @@ nav div button {
 }
 nav a {
   color: white;
+}
+
+div.img-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 700px;
 }
 
 div.chat-head {
@@ -152,6 +158,7 @@ div .lists {
   color: white;
   padding: 10px 20px 10px 40px;
   width: unset;
+  text-align: right;
 }
 div .lists a {
   cursor: pointer;
@@ -170,7 +177,7 @@ div .lists .active-channel {
 .dm-list {
   list-style-type: none;
   overflow-y: auto;
-  height: 150px;
+  height: 300px;
 }
 
 h4.heads {
@@ -230,7 +237,9 @@ div.msgs-content .msg-space .send-space {
   width: 100%;
   position: absolute;
   bottom: 0;
-  margin-left: 20px;
+  margin-left: 0px;
+  background-color: rgba(0, 0, 0, 0.8);
+  padding: 10px;
 }
 div.msgs-content .msg-space .send-space textarea,
 div.msgs-content .msg-space .send-space button {

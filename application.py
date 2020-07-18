@@ -1,4 +1,3 @@
-#! usr/env/bin python
 from flask import (Flask, render_template, request, url_for,
                    redirect, flash, session)
 import os
@@ -160,6 +159,7 @@ def main():
     """ initialize db """
     print("Initializing db")
     db.create_all()
+    print("DB initalized successfully!")
 
 
 if __name__ == "__main__":

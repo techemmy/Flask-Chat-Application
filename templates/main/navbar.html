@@ -1,12 +1,12 @@
 <nav class="navbar navbar-dark">
-    {% if session.logged_in %}
-        <h3 class="navbar-brand" style="color: whitesmoke;cursor: default;">ChatMe</h3>
+    {% if session.user %}
+        <h3 class="navbar-brand" style="color: whitesmoke;cursor: default;">Hook</h3>
         <div class="form-inline p-2">
             <a href="{{ url_for('chat') }}"><button type="button" class="btn btn-outline-success btn-lg m-1">Chat</button></a>
             <a href="{{ url_for('logout') }}"><button type="button" class="btn btn-outline-light btn-lg m-1">Logout</button></a>
         </div>
     {% else %}
-        <a class="navbar-brand" href="{{ url_for('index') }}">ChatMe</a>
+        <a class="navbar-brand" href="{{ url_for('index') }}">Hook</a>
         <div class="form-inline p-2">
             <a href="{{ url_for('login') }}"><button type="button" class="btn btn-outline-success btn-lg m-1" id="login_btn">Log In</button></a>
             <button type="button" class="btn btn-outline-light btn-lg m-1 signup" data-toggle="modal" data-target="#signup" id="signup_btn">Sign Up</button>
