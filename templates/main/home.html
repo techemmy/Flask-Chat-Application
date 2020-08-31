@@ -32,7 +32,7 @@
                     {% endwith %}
                     <div class="modal-body ml-3">
                         {% from "main/_formhelpers.html" import render_field %}
-                        <form action="{{ url_for('sign_up') }}" method="POST" class="sign-up-form">
+                        <form action="{{ url_for('auth.sign_up') }}" method="POST" class="sign-up-form">
                             <dl class="form-group">
                                 {{form.csrf_token}}
                                 {{render_field(form.firstname)}}
@@ -48,7 +48,7 @@
                                 <p class="error"><strong>Error: </strong>error</p>
                             {% endif %}
                         </form>
-                        <p>Have an account already? <a href="{{ url_for('login') }}">Log in</a> now</p>
+                        <p>Have an account already? <a href="{{ url_for('auth.login') }}">Log in</a> now</p>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

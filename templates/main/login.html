@@ -11,7 +11,7 @@
         <img src="{{ url_for('static', filename='assets/bg.svg') }}">
     </div>
     <div class="login-content">
-        <form action="{{ url_for('login') }}", method="POST">
+        <form action="{{ url_for('auth.login') }}", method="POST">
             <img src="{{ url_for('static', filename='assets/avatar.svg') }}">
             <h3 class="title">Welcome Back</h3>
                <div class="input-div one">
@@ -33,7 +33,7 @@
                </div>
             </div>
             <a href="#">Forgot Password?</a>
-            <span>Don't have an account <a href="{{ url_for('sign_up') }}" style="display: inline;color: teal;">register.</a></span>
+            <span>Don't have an account <a href="{{ url_for('auth.sign_up') }}" style="display: inline;color: teal;">register.</a></span>
             <input type="submit" class="btn" value="Login">
         </form>
     </div>

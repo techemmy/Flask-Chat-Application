@@ -1,5 +1,5 @@
 
-$fonts: Candara;
+$fonts: 'Candara';
 $primary-color: rgba(12, 155, 83, 0.863);
 $secondary-color: rgba(0, 0, 0, 0.8);
 $white: white;
@@ -18,6 +18,8 @@ body {
   font-family: $fonts, sans-serif;
   box-sizing: border-box;
   overflow-x: hidden;
+  height: 100vh;
+  width: 100vw;
 }
 
 nav {
@@ -65,7 +67,7 @@ button.menu__button {
   color: $white;
   font-size: 42px;
   border: 0;
-  line-height: 40px;
+  line-height: 45px;
   transition: 0.2s;
   position: absolute;
   top: 0;
@@ -73,6 +75,10 @@ button.menu__button {
   display: block;
   width: 50px;
   outline: none;
+  transition: opacity .4s ease-out;
+  &:hover {
+    opacity: .5;
+  }
 }
 
 .menu-wrap {
@@ -88,9 +94,6 @@ button.menu__button {
   overflow: hidden;
   z-index: 44;
   cursor: pointer;
-  &:hover {
-    border: 1px solid $white;
-  }
   &.open {
     background: white;
     width: auto;
@@ -163,6 +166,7 @@ button.menu__button {
 }
 
 .content {
+  width: initial;
 }
 
 div.lists, div.msgs-content {
@@ -173,7 +177,6 @@ div {
     background-color: $secondary-color;
     color: $white;
     padding: 10px 20px 10px 40px;
-    width: unset;
     text-align: right;
     a {
       cursor: pointer;
@@ -194,7 +197,7 @@ div {
 .dm-list {
   list-style-type: none;
   overflow-y: auto;
-  height: 300px;
+  height: 152px;
 }
 
 h4.heads {
@@ -227,6 +230,7 @@ div.msgs-content {
       width: 100%;
       overflow: auto;
       padding: 20px;
+      height: 400px;
       .msg-container{
         display: flex;
         width: 100%;
