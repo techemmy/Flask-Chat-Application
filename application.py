@@ -1,11 +1,9 @@
-from flask import (Flask, render_template, request, url_for,
-                   redirect, flash, session)
+from flask import (Flask, render_template, url_for,
+                   redirect, session)
 import os
 from flask_session import Session
 from models import db
 from forms import SignUpForm
-from passlib.hash import sha256_crypt
-from auth import login_required
 
 
 # returns flask application objects
@@ -30,7 +28,6 @@ def create_app(test_config=None):
     else:
         # if testing load app config on tests config
         app.config.from_mapping(test_config)
-
 
     @app.route('/<path:urlpath>/')
     @app.route('/', methods=['POST', 'GET'])
