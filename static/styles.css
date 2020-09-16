@@ -7,7 +7,7 @@
 body {
   margin: 0;
   padding: 0;
-  font-family: "Candara", sans-serif;
+  font-family: monospace, sans-serif;
   box-sizing: border-box;
   overflow-x: hidden;
   height: 100vh;
@@ -169,7 +169,7 @@ button.menu__button:hover {
 }
 
 .content {
-  width: initial;
+  margin: 0;
 }
 
 div .lists {
@@ -218,13 +218,11 @@ div.msgs-content {
 }
 div.msgs-content .msg-space {
   background: white;
-  padding: 0;
 }
 div.msgs-content .msg-space .msg-gutter {
-  margin: 0;
   width: 100%;
   overflow: auto;
-  padding: 20px;
+  margin: 20px 40px 20px 20px;
   height: 400px;
 }
 div.msgs-content .msg-space .msg-gutter .msg-container {
@@ -256,9 +254,9 @@ div.msgs-content .msg-space .send-space {
   width: 100%;
   position: absolute;
   bottom: 0;
-  margin-left: 0px;
   background-color: rgba(0, 0, 0, 0.8);
   padding: 10px;
+  margin: 0;
 }
 div.msgs-content .msg-space .send-space textarea,
 div.msgs-content .msg-space .send-space button {
@@ -267,7 +265,7 @@ div.msgs-content .msg-space .send-space button {
 }
 div.msgs-content .msg-space .send-space input[type=text] {
   height: 50px;
-  margin: 0 0 5px 0;
+  margin: 0 0 5px 20px;
   width: 100%;
 }
 div.msgs-content .msg-space .send-space a {
