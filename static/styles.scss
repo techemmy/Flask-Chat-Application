@@ -1,6 +1,6 @@
 
 $fonts: 'Candara';
-$primary-color: #32be8f;
+$primary-color: rgba(12, 155, 83, 0.863);
 $secondary-color: rgba(0, 0, 0, 0.8);
 $white: white;
 $info-col: rgb(241, 253, 249);
@@ -10,6 +10,7 @@ $info-col: rgb(241, 253, 249);
   margin: 0;
   padding: 0;
 }
+
 
 body {
   margin: 0;
@@ -22,14 +23,15 @@ body {
 }
 
 .btn-outline-success {
-  color: #32be8f;
-  border-color: #32be8f;
+  color: $primary-color;
+  border-color: $primary-color;
 }
 
 .btn-outline-success:hover {
-  background-color: #32be8f;
-  border-color: #32be8f;
+  background-color: $primary-color;
+  border-color: $primary-color;
 }
+
 
 nav {
   background: $secondary-color;
@@ -280,7 +282,7 @@ div.msgs-content {
         margin: 5px;
         border: 0;
       }
-      textarea {
+      input[type=text] {
         height: 50px;
         margin: 0 0 5px 0;
         width: 100%;

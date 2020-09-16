@@ -103,7 +103,7 @@ form{
 	bottom: -2px;
 	width: 0%;
 	height: 2px;
-	background-color: #38d39f;
+	background-color: rgba(12, 155, 83, 0.863);
 	transition: .4s;
 }
 
@@ -125,7 +125,7 @@ form{
 }
 
 .input-div.focus > .i > i{
-	color: #38d39f;
+	color: rgba(12, 155, 83, 0.863);
 }
 
 .input-div > div > input{
@@ -152,12 +152,12 @@ a{
 	text-align: right;
 	text-decoration: none;
 	color: #999;
-	font-size: 0.9rem;
+	font-size: 1rem;
 	transition: .3s;
 }
 
 a:hover{
-	color: #38d39f;
+	color: rgba(12, 155, 83, 0.863);
 }
 
 .btn{
@@ -167,7 +167,7 @@ a:hover{
 	border-radius: 25px;
 	outline: none;
 	border: none;
-	background-image: linear-gradient(to right, #32be8f, #38d39f, #32be8f);
+	background-image: linear-gradient(to right, rgba(12, 155, 83, 0.863), rgba(12, 155, 83, 0.899), rgba(12, 155, 83, 0.863));
 	background-size: 200%;
 	font-size: 1.2rem;
 	color: #fff;
