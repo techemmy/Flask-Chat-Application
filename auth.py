@@ -7,7 +7,7 @@ from forms import SignUpForm
 from passlib.hash import sha256_crypt
 
 
-bp = Blueprint('auth', __name__)
+auth = Blueprint('auth', __name__)
 
 
 def login_required(f):
@@ -37,7 +37,7 @@ def logout_required(f):
     return wrapped_view
 
 
-@bp.route('/sign-up/', methods=['POST', 'GET'])
+@auth.route('/sign-up/', methods=['POST', 'GET'])
 @logout_required
 def sign_up():
     """ registers user on post request """
@@ -79,7 +79,7 @@ def sign_up():
     return render_template('main/home.html', form=form)
 
 
-@bp.route('/login/', methods=['POST', 'GET'])
+@auth.route('/login/', methods=['POST', 'GET'])
 @logout_required
 def login():
     """ verify if user exists in the database """
@@ -105,7 +105,7 @@ def login():
     return render_template('main/login.html')
 
 
-@bp.route("/logout/")
+@auth.route("/logout/")
 @login_required
 def logout():
     """ logs out user """

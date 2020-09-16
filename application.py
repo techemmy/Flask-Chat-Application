@@ -40,11 +40,11 @@ def create_app(test_config=None):
         form = SignUpForm()
         return render_template('main/home.html', form=form)
 
-    from auth import bp
-    app.register_blueprint(bp, url_prefix='/auth/')
+    from auth import auth
+    app.register_blueprint(auth, url_prefix='/auth/')
 
-    from chat import bp
-    app.register_blueprint(bp, url_prefix='/chat/')
+    from chat import chat
+    app.register_blueprint(chat, url_prefix='/chat/')
 
     # initializes app and configures sessions
     db.init_app(app)

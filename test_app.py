@@ -56,7 +56,7 @@ class AuthenticationTests(unittest.TestCase):
 
     def login(self, username, password):
         """ login helper function """
-        return self.app.post('/login/',
+        return self.app.post('/auth/login/',
                              data={'username': username,
                                    'password': password},
                              follow_redirects=True,
@@ -64,7 +64,7 @@ class AuthenticationTests(unittest.TestCase):
 
     def logout(self):
         """ logout helper function """
-        return self.app.get('/logout/', follow_redirects=True)
+        return self.app.get('/auth/logout/', follow_redirects=True)
 
     def test_login_logout(self):
         """ test login and logout using helper functions """
