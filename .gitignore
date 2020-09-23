@@ -1,5 +1,7 @@
 .vscode
 __pycache__
+hook/__pycache__
+hook/routes/__pycache__
 env
 run.sh
 flask_session
