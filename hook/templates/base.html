@@ -37,9 +37,11 @@
             {% endfor %}
         {% endif %}
     {% endwith %}
-    
+
+    <div class="fluid-container">
     {% block content %}
     {% endblock %}
+    </div>
 
     {% include 'main/script.html' %}
 

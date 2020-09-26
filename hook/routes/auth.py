@@ -2,8 +2,8 @@ from flask import (Blueprint, session, flash,
                    redirect, url_for, render_template, request
                    )
 from functools import wraps
-from models import User
-from forms import SignUpForm
+from hook.models import User
+from hook.forms import SignUpForm
 from passlib.hash import sha256_crypt
 
 
@@ -83,24 +83,25 @@ def sign_up():
 @logout_required
 def login():
     """ verify if user exists in the database """
-    try:
-        if request.method == "POST":
+    if request.method == "POST":
+        try:
             # checks if user exists
             username = request.form.get('username')
             password = request.form.get('password')
-            u = User.query.filter_by(username=username).first()
-            v = sha256_crypt.verify(password, u.password)
-            if u and v:  # username and password
+            user = User.query.filter_by(username=username).first()
+            passcode = sha256_crypt.verify(password, user.password)
+            if user and passcode:  # username and password
                 # logs user in
                 print("Validated!")
-                session["user"] = u
+                session["user"] = user
                 flash("You are now logged in!")
                 return redirect(url_for('chat.index'))
             else:
                 flash("Invalid Login Details!")
-    except Exception as e:
-        flash('Check your credentials and try again!')
-        print('Error------>', e)
+                return redirect(url_for('auth.login'))
+        except Exception as e:
+            flash('Check your credentials and try again!')
+            print('Error------>', e)
 
     return render_template('main/login.html')
 

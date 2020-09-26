@@ -7,11 +7,12 @@
 body {
   margin: 0;
   padding: 0;
-  font-family: monospace, sans-serif;
+  font-family: system-ui, sans-serif;
   box-sizing: border-box;
   overflow-x: hidden;
   height: 100vh;
   width: 100vw;
+  background-color: rgba(0, 0, 0, 0.8);
 }
 
 .btn-outline-success {
@@ -24,9 +25,6 @@ body {
   border-color: rgba(12, 155, 83, 0.863);
 }
 
-nav {
-  background: rgba(0, 0, 0, 0.8);
-}
 nav .navbar-brand {
   transition: color 0.2s ease-out;
   cursor: pointer;
@@ -54,7 +52,6 @@ div.img-box img {
 }
 
 div.chat-head {
-  background: rgba(0, 0, 0, 0.8);
   margin: 0;
 }
 div.chat-head .chat-rep {
@@ -173,7 +170,6 @@ button.menu__button:hover {
 }
 
 div .lists {
-  background-color: rgba(0, 0, 0, 0.8);
   color: white;
   padding: 10px 20px 10px 40px;
   text-align: right;
@@ -254,7 +250,6 @@ div.msgs-content .msg-space .send-space {
   width: 100%;
   position: absolute;
   bottom: 0;
-  background-color: rgba(0, 0, 0, 0.8);
   padding: 10px;
   margin: 0;
 }

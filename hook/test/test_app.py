@@ -1,7 +1,7 @@
 import unittest
 import os
-from application import create_app
-from models import db, User
+from hook import create_app
+from hook.models import db, User
 
 TEST_DB = 'test.db'
 

@@ -2,9 +2,12 @@ document.addEventListener('DOMContentLoaded', () => {
     window.onload = () => {
         $('#signup').modal('show');
     }
-    document.querySelector('.signup').onclick = () => {
-        $('#signup').modal('show');
-    }; 
+    var signUpBtn = document.querySelector('.signup');
+    if (signUpBtn){
+		signUpBtn.onclick = () => {
+       		$('#signup').modal('show');
+    	}; 
+    };
     
 });
 
@@ -19,6 +22,4 @@ menuButton.addEventListener("click", () => {
 let toggleMenu = () => {
     menuWrap.classList.toggle("open");
 };
-
-
 

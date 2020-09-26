@@ -1,5 +1,5 @@
 
-$fonts: monospace;
+$fonts: system-ui;
 $primary-color: rgba(12, 155, 83, 0.863);
 $secondary-color: rgba(0, 0, 0, 0.8);
 $white: white;
@@ -20,6 +20,7 @@ body {
   overflow-x: hidden;
   height: 100vh;
   width: 100vw;
+  background-color: $secondary-color;
 }
 
 .btn-outline-success {
@@ -34,7 +35,6 @@ body {
 
 
 nav {
-  background: $secondary-color;
   .navbar-brand {
     transition: color 0.2s ease-out;
     cursor: pointer;
@@ -63,7 +63,6 @@ div.img-box {
 }
 
 div.chat-head {
-  background: $secondary-color;
   margin: 0;
   .chat-rep {
     color: $white;
@@ -187,7 +186,6 @@ div.lists, div.msgs-content {
 
 div {
   .lists {
-    background-color: $secondary-color;
     color: $white;
     padding: 10px 20px 10px 40px;
     text-align: right;
@@ -272,7 +270,6 @@ div.msgs-content {
       width: 100%;
       position: absolute;
       bottom: 0;
-      background-color: $secondary-color;
       padding: 10px;
       margin: 0;
       textarea,

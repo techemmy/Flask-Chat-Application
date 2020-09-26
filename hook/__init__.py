@@ -2,12 +2,15 @@ from flask import (Flask, render_template, url_for,
                    redirect, session)
 import os
 from flask_session import Session
-from models import db
-from forms import SignUpForm
+from hook.models import db
+from hook.forms import SignUpForm
+from flask_socketio import SocketIO
+
+socketio = SocketIO()
 
 
 # returns flask application objects
-def create_app(test_config=None):
+def create_app(test_config=None, debug=False):
     """ application's factory """
     app = Flask(__name__)
 
@@ -20,6 +23,7 @@ def create_app(test_config=None):
         SQLALCHEMY_DATABASE_URI=os.getenv('DATABASE_URL'),
         SQLALCHEMY_TRACK_MODIFICATIONS=False,
         SECRET_KEY=SECRET_KEY,
+        debug=debug
     )
 
     if test_config is None:
@@ -31,7 +35,6 @@ def create_app(test_config=None):
 
     @app.route('/<path:urlpath>/')
     @app.route('/', methods=['POST', 'GET'])
-    # @logout_required
     def index(urlpath='/'):
         """ homepage for all non-registered users """
         # if user not in session, form pop's up
@@ -40,30 +43,15 @@ def create_app(test_config=None):
         form = SignUpForm()
         return render_template('main/home.html', form=form)
 
-    from auth import auth
+    from hook.routes.auth import auth
     app.register_blueprint(auth, url_prefix='/auth/')
 
-    from chat import chat
+    from hook.routes.chat import chat
     app.register_blueprint(chat, url_prefix='/chat/')
 
     # initializes app and configures sessions
     db.init_app(app)
     Session(app)
+    socketio.init_app(app)
 
     return app
-
-
-# initializes db on cli call
-def main():
-    """ initialize db """
-    print("Initializing db")
-    db.create_all()
-    print("DB initalized successfully!")
-
-
-if __name__ == "__main__":
-    create_app().app_context().push()
-    # initializes db on cli call
-    main()
-
-# TODO: start working on the chat engine

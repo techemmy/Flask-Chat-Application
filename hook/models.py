@@ -1,6 +1,6 @@
 #! usr/env/bin python
 from flask_sqlalchemy import SQLAlchemy
-import time
+import datetime
 
 db = SQLAlchemy()
 
@@ -88,5 +88,5 @@ class MessageCreator:
     def __init__(self, name, message):
         """ configure message's arguments """
         self.name = name
-        self.timestamp = time.strftime('%H:%M')
+        self.timestamp = datetime.datetime.now()
         self.message = message

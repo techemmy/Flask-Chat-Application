@@ -1,11 +1,6 @@
-from flask import Blueprint, render_template, session
-from auth import login_required
+from hook import create_app, socketio
 
-chat = Blueprint('chat', __name__)
+app = create_app(debug=True)
 
-
-@chat.route('/')
-@login_required
-def index():
-    """ chat page if user is logged in """
-    return render_template('main/chat.html')
+if __name__ == '__main__':
+	socketio.run(app)

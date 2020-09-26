@@ -4,8 +4,8 @@ python:
 install:
   - pip install -r requirements.txt
 script:
-  - flake8 application.py
-  - flake8 models.py
-  - flake8 forms.py
-  - python test_app.py
+  - flake8 hook/__init__.py
+  - flake8 hook/models.py
+  - flake8 hook/forms.py
+  - python -m unittest discover hook/test
 
