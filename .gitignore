@@ -8,3 +8,4 @@ flask_session
 test-backup.py
 tests/
 venv/
+hook/test/test.db
