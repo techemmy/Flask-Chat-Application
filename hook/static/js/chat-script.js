@@ -9,7 +9,17 @@ document.addEventListener('DOMContentLoaded', () => {
 		console.log("Connecting script...");
 		socket.emit('connected', {'data': 'I\'m connected!'});
 	});
+
+	// load last active channel on page reload
+	if (localStorage.getItem('activeChannel')){
+		let channelName = localStorage.getItem('activeChannel');
+		let channelId = localStorage.getItem('id')
+		console.log(channelName);
+		socket.emit('getChannelDetails', {'name': channelName, 'id': channelId});
+	};
+	
 	document.querySelectorAll('.channel').forEach((channel) => {
+		// gets channels detail from server on channel's click
 		channel.onclick = () => {
 			// Get channel name & id
 			const name = channel.innerHTML;
@@ -21,10 +31,15 @@ document.addEventListener('DOMContentLoaded', () => {
 	});
 
 	socket.on('channelMessagesDelivered', (data) => {
-		broadcastMessage(data);
+		showMessage(data);
 	});
 
+	// ----------------ERROR HANDLING-----------------
 	socket.on('ChannelDoesNotExist', (data) => {
+		alert(data.error)
+	});
+
+	socket.on('ErrorJoiningChannel', (data) => {
 		alert(data.error)
 	});
 
@@ -33,34 +48,35 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 document.addEventListener('DOMContentLoaded', () => {
-    const addNew = document.querySelectorAll('.add-new').forEach((addNew) => {
+	// initializes function for adding new object (channel, DM)
+    var addNew = document.querySelectorAll('.add-new').forEach((addNew) => {
     	addNew.onclick = () => {
-    		document.querySelector('.modal-dialog .modal-title').innerHTML = `Add New ${addNew.dataset.type}`;
+    		const type = addNew.dataset.type;
+    		document.querySelector('.modal-dialog .modal-title').innerHTML = `Add New ${type}`;
+    		document.querySelector('#add-new-field').dataset.type = type;
     		$('#add-temp').modal('show');
+
+    		console.log(document.querySelector('#add-new-field'));
+
+			document.querySelector('#add-new-form').onsubmit = addNewObject;
     	};
     });
-
- //    window.onload = () => {
-	// 	let channelName = localStorage.getItem('activeChannel');
-	// 	let channelId = localStorage.getItem('id')
-	// 	console.log(channelName);
-	// 	socket.emit('getChannelDetails', {'name': name, 'id': id});
-	// }
-
-	document.querySelector('#add-new-form').onsubmit = addNewChannel;
 });
 
 
-// =================== FUNCTIONS =============================== //
+// ----------------- FUNCTIONS ------------------- //
 
 
-function addNewChannel(){
+function addNewObject(){
 	// initialize AJAX request
 	const request = new XMLHttpRequest();
-	const channelName = document.querySelector('#add-new-field').value;
+
+	const name = document.querySelector('#add-new-field').value;
+	const type = document.querySelector('#add-new-field').dataset.type;
 	$('#add-temp').modal('hide');
 	document.querySelector('#add-new-field').value = '';
-	request.open('POST', '/chat/add-channel');
+
+	request.open('POST', '/chat/add-new-obj');
 
 	// callback function on completion of request
 	request.onload = () => {
@@ -70,8 +86,8 @@ function addNewChannel(){
 
 		// add channel
 		if (data.success){
-			const channel_name = `${data.channel_name}`;
-			console.log(channel_name);
+			const name = `${data.name}`;
+			console.log(name);
 		} else {
 			alert(data.error);
 		}
@@ -79,7 +95,8 @@ function addNewChannel(){
 
 	// add data to send with request
 	const data = new FormData();
-	data.append('channel_name', channelName)
+	data.append('name', name)
+	data.append('type', type)
 
 	// send request
 	request.send(data);
@@ -87,7 +104,7 @@ function addNewChannel(){
 };
 
 
-function broadcastMessage(data) {
+function showMessage(data) {
 	 document.querySelector('.msg-gutter').innerHTML = '';
 	 document.querySelector('.active-channel').innerHTML = localStorage.getItem('activeChannel');
 	// loop to add message to the message gutter
@@ -130,12 +147,16 @@ function broadcastMessage(data) {
   		msgCont.append(msgName);
   		msgCont.append(msgTime);
   		msgCont.append(msgMsg);
-
   		msgInfo.append(msgPic);
   		msgInfo.append(msgCont);
   		msgContainer.append(msgInfo);
-
+  		if(!data.messages){
+  			alert("no");
+  		}
 
   		document.querySelector('.msg-gutter').append(msgContainer);
 	}
 };
+
+// function broadcastMessage(data){
+// };
