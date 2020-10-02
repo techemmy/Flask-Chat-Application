@@ -18,11 +18,11 @@
                     <ul class="menu__list">
                         <li>
                             <span class="icon"></span>
-                            Channel
+                            <a class="add-new" data-type="channel">Channel</a>
                         </li>
                         <li>
                             <span class="icon"></span>
-                            Direct Message(DM)
+                            <a class="add-new" data-type="DM">Direct Message(DM)</a>
                         </li>
                     </ul>
                 </div>
@@ -36,7 +36,9 @@
             <h4 title="Channels" class="heads">Channel(s)</h4>
             <ul class="channels-list">
                 <!-- LIST OF CHANNELS -->
-                <li class="channel"></li>
+                {% for channel in context["channels"] %}
+                <li class="channel" data-get={{channel.id}}>#{{ channel.channel_name }}</li>
+                {% endfor %}
             </ul>
             <h4 title="Direct Messages" class="heads">Direct Message(s) (DM)</h4>
             <ul class="dm-list">
@@ -48,7 +50,7 @@
             <div class="msg-space row">
                 <div class="msg-gutter row">
                     <!-- MESSAGES GUTTER -->
-                   <!--  <div class="msg-container">
+<!--                    <div class="msg-container">
                         <div class="msg-info">
                             <div class="msg-pic"><img src="{{ url_for('static', filename='assets/msg-img.png') }}" alt="user-image" class="msg-img"></div>
                             <div class="msg-cont">
@@ -67,8 +69,8 @@
                                 <p class="msg-msg">message</p>
                             </div>
                         </div>
-                    </div> -->
-
+                    </div>
+ -->
                 </div>
                 <div class="send-space row">
                     <input type="text" name="message" class="form-control col-sm-10">
@@ -79,6 +81,40 @@
     </div>
 </main>
 
+
+<div class="modal" id="add-temp" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="static", data-keyboard="false">
+    <div class="modal-dialog modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title"><!-- New-title --></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    {% for message in messages %}
+                    <div class="alert alert-warning alert-dismissible fade show text-center" role="alert">
+                            {{ message }}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+            <div class="modal-body">
+                <form class="row m-3" id="add-new-form", method="post">
+                    <input type="text" class="form-control col-sm-12 m-1" id="add-new-field" style="outline: solid;" />
+                    <button class="btn btn-outline-success col-sm-12 m-1">Add</button>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
 <!-- Socket Script -->
 <!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.3.6/socket.io.min.js"></script> -->
 <script src="//cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js" integrity="sha256-yr4fRk/GU1ehYJPAs8P4JlTgu0Hdsp4ZKrx8bDEDC3I=" crossorigin="anonymous"></script>
