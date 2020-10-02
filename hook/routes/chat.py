@@ -72,7 +72,7 @@ def get_channel_details(data):
 	# confirm existence of channel
 	channel = Channel.query.get(channel_id)
 	# on existence get channel messages
-	if channel.channel_name == channel_name:
+	if channel.channel_name == channel_name:  # check if the channel exists
 		message_objects = channel.messages.all()
 		messages = []
 		for message in message_objects:
@@ -82,16 +82,16 @@ def get_channel_details(data):
 			timestamp = ' ' + str(time.date()) + ' | ' + str(time.strftime('%H:%M'))
 			messages.append([user.username, timestamp,
 			                 message.message])
-			try:
-				# enter channel as a room
-				room = join_room(channel_name)
-				join_room(channel_name)
-				# return details to script
-				emit('channelMessagesDelivered', {"messages": messages,
-				     "user": current_user}, room=room)
-			finally:
-				emit('ErrorJoiningChannel', {'error': 'Couldn\'t join channel'},
-			          broadcast=False)
+		try:
+			# enter channel as a room
+			room = join_room(channel_name)
+			join_room(channel_name)
+			# return details to script
+			emit('channelMessagesDelivered', {"messages": messages,
+			     "user": current_user}, room=room)
+		except Exception:
+			emit('ErrorJoiningChannel', {'error': 'Couldn\'t join channel'},
+		          broadcast=False)
 
 	else:
 		emit('ChannelDoesNotExist', {'error': 'Channel does not exists'},
