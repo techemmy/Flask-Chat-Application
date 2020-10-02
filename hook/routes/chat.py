@@ -4,6 +4,7 @@ from flask_socketio import emit, join_room
 from .. import socketio
 from ..models import Channel, User
 
+
 chat = Blueprint('chat', __name__)
 
 
@@ -17,24 +18,40 @@ def index():
     return render_template('main/chat.html', context=context)
 
 
-@chat.route('/add-channel', methods=['POST'])
+def _process_info(name, n_type):
+    if n_type == 'channel':
+        if not Channel.query.filter_by(channel_name=name).all():
+            new_channel = Channel(name)
+            new_channel.save()
+            return new_channel
+        else:
+        	return 'Error'
+
+
+@chat.route('/add-new-obj', methods=['POST'])
 def add_new_channel():
-    channel_name = request.form.get('channel_name')
-    channel_name = channel_name.strip()
-    if channel_name:
-	    if not Channel.query.filter_by(channel_name=channel_name).all():
-		    new_channel = Channel(channel_name)
-		    new_channel.save()
-
-		    return jsonify({'channel_name': new_channel.channel_name, 'success': True,
-		                    'error': 'null'})
-	    else:
-	    	return jsonify({'success': False, 'error': 'Channel already exists!'})
+    name = request.form.get('name')
+    new_type = request.form.get('type')
+    if new_type == 'channel':
+        name = name.strip()
+        if name:
+            new_channel = _process_info(name, new_type)
+            if new_channel == 'Error':
+            	# return error if channel already exists
+                return jsonify({'success': False, 'error': 'Channel already exists!'})
+            # return success
+            return jsonify({'name': new_channel.channel_name, 'success': True,
+                            'error': 'null'})
+        else:
+        	# return invalid input
+        	return jsonify({'success': False, 'error': 'Invalid input.'})
+    elif new_type == 'DM':
+        return jsonify({'name': 'ME', 'success': True,
+                       'error': 'null'})
     else:
-        return jsonify({'success': False, 'error': 'Invalid input.'})
+        pass
 
-
-# ============== SOCKETS CODES =================
+# ------------- SOCKETS CODES --------------
 
 @socketio.on('connected', namespace='/chat')
 def connected(data):
@@ -65,12 +82,17 @@ def get_channel_details(data):
 			timestamp = ' ' + str(time.date()) + ' | ' + str(time.strftime('%H:%M'))
 			messages.append([user.username, timestamp,
 			                 message.message])
+			try:
+				# enter channel as a room
+				room = join_room(channel_name)
+				join_room(channel_name)
+				# return details to script
+				emit('channelMessagesDelivered', {"messages": messages,
+				     "user": current_user}, room=room)
+			finally:
+				emit('ErrorJoiningChannel', {'error': 'Couldn\'t join channel'},
+			          broadcast=False)
+
 	else:
 		emit('ChannelDoesNotExist', {'error': 'Channel does not exists'},
 			 broadcast=False)
-	# enter channel as a room
-	room = join_room(channel_name)
-	join_room(channel_name)
-	# return details to script
-	emit('channelMessagesDelivered', {"messages": messages,
-	     "user": current_user}, room=room)
