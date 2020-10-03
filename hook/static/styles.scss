@@ -235,6 +235,9 @@ div.msgs-content {
   width: 100%;
   .msg-space {
     background: $white;
+    #send_btn {
+      visibility: hidden;
+    }
     .msg-gutter {
       width: 100%;
       overflow: auto;
