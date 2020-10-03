@@ -14,12 +14,11 @@ document.addEventListener('DOMContentLoaded', () => {
 	if (localStorage.getItem('activeChannel')){
 		let channelName = localStorage.getItem('activeChannel');
 		let channelId = localStorage.getItem('id')
-		console.log(channelName);
 		socket.emit('getChannelDetails', {'name': channelName, 'id': channelId});
 	};
 	
+	// gets channels detail from server on channel's click
 	document.querySelectorAll('.channel').forEach((channel) => {
-		// gets channels detail from server on channel's click
 		channel.onclick = () => {
 			// Get channel name & id
 			const name = channel.innerHTML;
@@ -30,19 +29,35 @@ document.addEventListener('DOMContentLoaded', () => {
 		};
 	});
 
+	// send message
+	const msg_box = document.querySelector('#send-message');
+	const send_btn = document.querySelector('#send_btn');
+	msg_box.onkeyup = () => {
+		if(((msg_box.value).trim()).length > 0){
+			send_btn.style.visibility = 'visible';
+		}else{
+			send_btn.style.visibility = 'hidden';
+		}
+	};
+	send_btn.onkeydown = () => {
+		send_btn.style.visibility = 'hidden';
+		const msg = msg_box.value;
+		msg_box.value = '';
+		// to ensure message is not an empty string
+		if(!(msg.trim() === '')){
+			socket.emit('sendMessageToChannel', {'message': msg, 'room': document.querySelector('.active-channel').innerText});
+		};
+	};
+
+	// show message on channel load
 	socket.on('channelMessagesDelivered', (data) => {
 		showMessage(data);
 	});
 
-	// ----------------ERROR HANDLING-----------------
-	socket.on('ChannelDoesNotExist', (data) => {
+	// ----------------ERROR HANDLER-----------------
+	socket.on('Error', (data) => {
 		alert(data.error)
 	});
-
-	socket.on('ErrorJoiningChannel', (data) => {
-		alert(data.error)
-	});
-
 
 });
 
