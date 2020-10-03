@@ -73,8 +73,8 @@
  -->
                 </div>
                 <div class="send-space row">
-                    <input type="text" name="message" class="form-control col-sm-10">
-                    <a href=""><img src="{{ url_for('static', filename='assets/send-img.png') }}" alt="send" class="send-img"></a>
+                    <input type="text" name="message" class="form-control col-sm-10" id="send-message">
+                    <a id="send_btn" tabindex=0><img src="{{ url_for('static', filename='assets/send-img.png') }}" alt="send" class="send-img"></a>
                 </div>
             </div>
         </div>
