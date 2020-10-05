@@ -10,6 +10,14 @@ document.addEventListener('DOMContentLoaded', () => {
 		socket.emit('connected', {'data': 'I\'m connected!'});
 	});
 
+	socket.on('setLocalStorage', (data) => {
+		localStorage.setItem('username', data.name);
+	});
+
+	if (!(localStorage.getItem('username'))){
+		window.reload();
+	}
+
 	// load last active channel on page reload
 	if (localStorage.getItem('activeChannel')){
 		let channelName = localStorage.getItem('activeChannel');
@@ -53,6 +61,11 @@ document.addEventListener('DOMContentLoaded', () => {
 	socket.on('channelMessagesDelivered', (data) => {
 		showMessage(data);
 	});
+
+	// append message to room(channel, DM)
+	socket.on('broadcastMessage', (data) => {
+		broadcastMessage(data);
+	})
 
 	// ----------------ERROR HANDLER-----------------
 	socket.on('Error', (data) => {
@@ -165,13 +178,54 @@ function showMessage(data) {
   		msgInfo.append(msgPic);
   		msgInfo.append(msgCont);
   		msgContainer.append(msgInfo);
-  		if(!data.messages){
-  			alert("no");
-  		}
 
   		document.querySelector('.msg-gutter').append(msgContainer);
 	}
 };
 
-// function broadcastMessage(data){
-// };
+function broadcastMessage(data){
+	// loop to add message to the message gutter
+	message = data.message;
+
+	let msgContainer = document.createElement('div');
+	msgContainer.className = 'msg-container';
+	if (localStorage.getItem('username') === message[0]){
+		msgContainer.style.justifyContent = 'flex-end';
+	};
+
+	let msgInfo = document.createElement('div');
+	msgInfo.className = 'msg-info';
+
+	let msgPic = document.createElement('div');
+	msgPic.className = 'msg-pic';
+
+	let msgImg = document.createElement('img');
+	msgImg.src = '../static/assets/msg-img.png';
+	msgImg.alt = 'user-image';
+	msgImg.className = 'msg-img';
+
+	let msgCont = document.createElement('div');
+	msgCont.className = 'msg-cont';
+
+	let msgName = document.createElement('span');
+	msgName.className = 'msg-name';
+	msgName.innerHTML = `${message[0]}`;
+
+	let msgTime = document.createElement('span');
+	msgTime.className = 'msg-time';
+	msgTime.innerHTML = `${message[1]}`;
+
+	let msgMsg = document.createElement('p');
+	msgMsg.className = 'msg-msg';
+	msgMsg.innerHTML = `${message[2]}`;
+
+	msgPic.append(msgImg);
+	msgCont.append(msgName);
+	msgCont.append(msgTime);
+	msgCont.append(msgMsg);
+	msgInfo.append(msgPic);
+	msgInfo.append(msgCont);
+	msgContainer.append(msgInfo);
+
+	document.querySelector('.msg-gutter').append(msgContainer);
+};
