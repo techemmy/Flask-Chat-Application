@@ -19,10 +19,15 @@ document.addEventListener('DOMContentLoaded', () => {
 	}
 
 	// load last active channel on page reload
-	if (localStorage.getItem('activeChannel')){
-		let channelName = localStorage.getItem('activeChannel');
-		let channelId = localStorage.getItem('id')
-		socket.emit('getChannelDetails', {'name': channelName, 'id': channelId});
+	if (localStorage.getItem('activeTab')){
+		let activeTab = localStorage.getItem('activeTab'); // TODO: set on load to get active channel or DM
+		let activeId = localStorage.getItem('id')
+		// TODO!possiblities:
+		if(activeTab.slice(0,1) === '#'){
+			socket.emit('getChannelDetails', {'name': activeTab, 'id': activeId});	
+		}else{
+			socket.emit('getDMDetails', {'name': activeTab, 'id': activeId});
+		};
 	};
 	
 	// gets channels detail from server on channel's click
@@ -31,7 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
 			// Get channel name & id
 			const name = channel.innerHTML;
 			const id = channel.dataset.get;
-			localStorage.setItem('activeChannel', name);
+			localStorage.setItem('activeTab', name);
 			localStorage.setItem('id', id)
 			socket.emit('getChannelDetails', {'name': name, 'id': id});
 		};
@@ -53,7 +58,7 @@ document.addEventListener('DOMContentLoaded', () => {
 		msg_box.value = '';
 		// to ensure message is not an empty string
 		if(!(msg.trim() === '')){
-			socket.emit('sendMessageToChannel', {'message': msg, 'room': document.querySelector('.active-channel').innerText});
+			socket.emit('sendMessageToChannel', {'message': msg, 'room': document.querySelector('.active-tab').innerText});
 		};
 	};
 
@@ -134,7 +139,7 @@ function addNewObject(){
 
 function showMessage(data) {
 	 document.querySelector('.msg-gutter').innerHTML = '';
-	 document.querySelector('.active-channel').innerHTML = localStorage.getItem('activeChannel');
+	 document.querySelector('.active-tab').innerHTML = localStorage.getItem('activeTab');
 	// loop to add message to the message gutter
 	for(i=0; i < data.messages.length; i++){
 		message = data.messages[i]
