@@ -130,5 +130,10 @@ def send_message_to_channel(data):
 		except Exception:
 			emit('Error', {'error': 'Error sending message.'})
 	else:
-		print("Pssd..")
+		emit('Error', {'error': 'Invalid message'}, broadcast=False)
+
+
+@socketio.on('getDMDetails', namespace='/chat')
+def get_dm_details(data):
+	pass
 
