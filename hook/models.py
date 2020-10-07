@@ -80,3 +80,10 @@ class Message(db.Model):
         """ saves messages """
         db.session.add(self)
         db.session.commit()
+
+
+# class DM(db.model):
+#     """ Direct Messages (DM) table in the database"""
+#     __tablename__ = 'DM'
+#     id = db.Column(db.Integer, primary_key=True)
+    
