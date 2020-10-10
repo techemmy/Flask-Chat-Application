@@ -1,4 +1,5 @@
-from flask import Blueprint, render_template, session, request, jsonify
+from flask import (Blueprint, render_template, session, request, 
+                  jsonify, redirect, url_for)
 from hook.routes.auth import login_required
 from flask_socketio import emit, join_room
 from .. import socketio
@@ -11,11 +12,17 @@ chat = Blueprint('chat', __name__)
 @chat.route('/')
 @login_required
 def index():
-    """ chat page if user is logged in """
-    context = {
-    	'channels': Channel.query.all()
-    }
-    return render_template('main/chat.html', context=context)
+	""" chat page if user is logged in """
+	usr_obj = session.get('user')
+	try:
+		user = User.query.filter_by(username=usr_obj.username).one()
+		check = user.username
+	except:
+		return redirect(url_for('auth.login'))
+	context = {
+		'channels': Channel.query.all()
+		}
+	return render_template('main/chat.html', context=context)
 
 
 def _process_info(name, n_type):
