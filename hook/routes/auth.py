@@ -80,9 +80,9 @@ def sign_up():
 
 
 @auth.route('/login/', methods=['POST', 'GET'])
-@logout_required
 def login():
     """ verify if user exists in the database """
+
     if request.method == "POST":
         try:
             # checks if user exists
@@ -102,6 +102,7 @@ def login():
         except Exception as e:
             flash('Check your credentials and try again!')
             print('Error------>', e)
+    session.clear()
 
     return render_template('main/login.html')
 
