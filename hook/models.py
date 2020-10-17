@@ -39,13 +39,14 @@ class User(db.Model):
 
     def get_dm(self):
         dms = Dm.query.filter(or_(
-                                Dm.user_one==self.id,
-                                Dm.user_two==self.id)).all()
+                                Dm.user_one == self.id,
+                                Dm.user_two == self.id)).all()
         output = []
         for dm in dms:
             output.append([dm.id, dm.get_name(self.id), dm.room])
 
         return output
+
 
 class Channel(db.Model):
     """
@@ -94,6 +95,7 @@ class Message(db.Model):
         db.session.add(self)
         db.session.commit()
 
+
 class Dm(db.Model):
     """ DM table in the database """
     __tablename__ = 'dm'
@@ -101,7 +103,8 @@ class Dm(db.Model):
     room = db.Column(db.Text, unique=True)
     user_one = db.Column(db.Integer, nullable=False)
     user_two = db.Column(db.Integer, nullable=False)
-    messages = db.relationship('Message', backref='direct_msg', lazy='dynamic', order_by='Message.timestamp')
+    messages = db.relationship('Message', backref='direct_msg',
+                               lazy='dynamic', order_by='Message.timestamp')
 
     def __init__(self, u1, u2):
         self.user_one = u1
@@ -117,9 +120,7 @@ class Dm(db.Model):
         except IntegrityError:
             db.session.rollback()
 
-
     def _get_room(self):
-        # room = os.urandom(16)
         run = True
         while run:
             room = os.urandom(16)
@@ -127,7 +128,6 @@ class Dm(db.Model):
                 if room != dm.room:
                     run = False
         return room
-
 
     def get_name(self, present_user_id):
         try:
@@ -145,10 +145,10 @@ class Dm(db.Model):
         user1 = self.user_one
         user2 = self.user_two
         exists = Dm.query.filter(or_(
-                            and_(Dm.user_one==user1,
-                                 Dm.user_two==user2), 
-                            and_(Dm.user_one==user2,
-                                 Dm.user_two==user1))).all()
+                            and_(Dm.user_one == user1,
+                                 Dm.user_two == user2),
+                            and_(Dm.user_one == user2,
+                                 Dm.user_two == user1))).all()
         if exists:
             raise Exception("DM already exists.")
             return False
