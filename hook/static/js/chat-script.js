@@ -20,13 +20,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
 	// load last active channel on page reload
 	if (localStorage.getItem('activeTab')){
-		let activeTab = localStorage.getItem('activeTab'); // TODO: set on load to get active channel or DM
+		let activeTab = localStorage.getItem('activeTab');
 		let activeId = localStorage.getItem('id')
 		// TODO!possiblities:
 		if(activeTab.slice(0,1) === '#'){
-			socket.emit('getChannelDetails', {'name': activeTab, 'id': activeId});	
+			socket.emit('joinChannel', {'name': activeTab, 'id': activeId});	
 		}else{
-			socket.emit('getDMDetails', {'name': activeTab, 'id': activeId});
+			socket.emit('joinDM', {'name': activeTab, 'id': activeId,
+			            'room': localStorage.getItem('dm_room')});
 		};
 	};
 	
@@ -38,7 +39,22 @@ document.addEventListener('DOMContentLoaded', () => {
 			const id = channel.dataset.get;
 			localStorage.setItem('activeTab', name);
 			localStorage.setItem('id', id)
-			socket.emit('getChannelDetails', {'name': name, 'id': id});
+			socket.emit('joinChannel', {'name': name, 'id': id});
+		};
+	});
+
+	// gets dm detail from server on dm's click
+	document.querySelectorAll('.dm').forEach((dm) => {
+		dm.onclick = () => {
+			// Get channel name & id
+			const name = dm.innerHTML;
+			const id = dm.dataset.get;
+			const room = dm.dataset.room;
+			localStorage.setItem('activeTab', name);
+			localStorage.setItem('id', id)
+			localStorage.setItem('dm_room', room)
+			console.log(name, id)
+			socket.emit('joinDM', {'name': name, 'id': id, 'room': room});
 		};
 	});
 
@@ -52,18 +68,27 @@ document.addEventListener('DOMContentLoaded', () => {
 			send_btn.style.visibility = 'hidden';
 		}
 	};
-	send_btn.onkeydown = () => {
+	addListenerMulti(send_btn, "click keydown", () => {
 		send_btn.style.visibility = 'hidden';
 		const msg = msg_box.value;
 		msg_box.value = '';
 		// to ensure message is not an empty string
 		if(!(msg.trim() === '')){
-			socket.emit('sendMessageToChannel', {'message': msg, 'room': document.querySelector('.active-tab').innerText});
+			const activeTab = document.querySelector('.active-tab').innerHTML;
+			if (activeTab.slice(0,1) === '#'){
+				socket.emit('sendMessageToChannel', {'message': msg,
+				            'room': document.querySelector('.active-tab').innerText});
+			}
+			if (activeTab.slice(0,1) !== '#'){
+				socket.emit('sendMessageToDm', {'message': msg,
+				            'dm_name': document.querySelector('.active-tab').innerText,
+				             'dm_room': localStorage.getItem('dm_room')});
+			}
 		};
-	};
+	});
 
 	// show message on channel load
-	socket.on('channelMessagesDelivered', (data) => {
+	socket.on('MessagesDelivered', (data) => {
 		showMessage(data);
 	});
 
@@ -98,6 +123,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 // ----------------- FUNCTIONS ------------------- //
+
+
+function addListenerMulti(element, eventNames, listener) {
+	// adds multiple events listeners
+  var events = eventNames.split(' ');
+  for (var i=0, iLen=events.length; i<iLen; i++) {
+    element.addEventListener(events[i], listener, false);
+  }
+};
 
 
 function addNewObject(){
