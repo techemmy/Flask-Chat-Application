@@ -81,7 +81,6 @@ def sign_up():
 @logout_required
 def login():
     """ verify if user exists in the database """
-    flash("Hello")
     if request.method == "POST":
         try:
             # checks if user exists
