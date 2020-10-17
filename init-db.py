@@ -1,5 +1,6 @@
 from hook import create_app, db
 
+
 # initializes db on cli call
 def main():
     """ initialize db """
