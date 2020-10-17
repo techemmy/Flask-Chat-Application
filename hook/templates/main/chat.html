@@ -36,14 +36,20 @@
             <h4 title="Channels" class="heads">Channel(s)</h4>
             <ul class="channels-list">
                 <!-- LIST OF CHANNELS -->
-                {% for channel in context["channels"] %}
-                <li class="channel" data-get={{channel.id}}>#{{ channel.channel_name }}</li>
-                {% endfor %}
+                {% if context["channels"] %}
+                    {% for channel in context["channels"] %}
+                    <li class="channel" data-get={{channel.id}}>#{{ channel.channel_name }}</li>
+                    {% endfor %}
+                {% endif %}
             </ul>
             <h4 title="Direct Messages" class="heads">Direct Message(s) (DM)</h4>
             <ul class="dm-list">
                 <!-- LIST OF DM -->
-                <li class="dm"></li>
+                {% if context["dms"] %}
+                    {% for dm in context["dms"] %}
+                    <li class="dm" data-get={{dm[0]}} data-get={{dm[1]}} data-room={{dm[2]}}>{{ dm[1] }}</li>
+                    {% endfor %}
+                {% endif %}
             </ul>
         </div>
         <div class="col-sm-8 col-md-8 col-lg-9 msgs-content">
