@@ -71,8 +71,7 @@ def sign_up():
             else:
                 # username exists error flash
                 flash("Username already exists.")
-        except Exception as e:
-            print(e)
+        except Exception:
             return redirect(url_for('index'))
     return render_template('main/home.html', form=form)
 
@@ -91,7 +90,6 @@ def login():
 
             if user and secret:  # username and password
                 # logs user in
-                print("Validated!")
                 session.clear()
                 session["user"] = user
                 flash("You are now logged in!")
