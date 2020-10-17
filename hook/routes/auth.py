@@ -76,6 +76,7 @@ def sign_up():
             return redirect(url_for('index'))
     return render_template('main/home.html', form=form)
 
+
 @auth.route('/login/', methods=['POST', 'GET'])
 @logout_required
 def login():
@@ -86,12 +87,8 @@ def login():
             # checks if user exists
             username = request.form.get('username')
             password = request.form.get('password')
-            # try:
             user = User.query.filter_by(username=username).first()
             secret = sha256_crypt.verify(password, user.password)
-            # except AttributeError as e:
-            #     flash('Check your credentials and try again!')
-
 
             if user and secret:  # username and password
                 # logs user in
@@ -103,7 +100,7 @@ def login():
             else:
                 flash("Invalid Login Details!")
                 return redirect(url_for('auth.login'))
-        except Exception as e:
+        except Exception:
             flash('Check your credentials and try again!')
     return render_template('main/login.html')
 
