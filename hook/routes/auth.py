@@ -42,7 +42,6 @@ def logout_required(f):
 def sign_up():
     """ registers user on post request """
     form = SignUpForm()
-    print("validating...")
     # validate users information and form submissioin
     if form.validate_on_submit():
         try:
@@ -63,9 +62,8 @@ def sign_up():
                                     username=username, email=email,
                                     password=password, terms=terms)
                     new_user.save()
-                    print("validated...")
-                    flash("You have been signed up successfully! \
-                           Now login your details")
+
+                    flash("You have been signed up successfully!")
                     return redirect(url_for('auth.login'))
                 else:
                     # email taken error flash
@@ -78,21 +76,27 @@ def sign_up():
             return redirect(url_for('index'))
     return render_template('main/home.html', form=form)
 
-
 @auth.route('/login/', methods=['POST', 'GET'])
+@logout_required
 def login():
     """ verify if user exists in the database """
-
+    flash("Hello")
     if request.method == "POST":
         try:
             # checks if user exists
             username = request.form.get('username')
             password = request.form.get('password')
+            # try:
             user = User.query.filter_by(username=username).first()
-            passcode = sha256_crypt.verify(password, user.password)
-            if user and passcode:  # username and password
+            secret = sha256_crypt.verify(password, user.password)
+            # except AttributeError as e:
+            #     flash('Check your credentials and try again!')
+
+
+            if user and secret:  # username and password
                 # logs user in
                 print("Validated!")
+                session.clear()
                 session["user"] = user
                 flash("You are now logged in!")
                 return redirect(url_for('chat.index'))
@@ -101,9 +105,6 @@ def login():
                 return redirect(url_for('auth.login'))
         except Exception as e:
             flash('Check your credentials and try again!')
-            print('Error------>', e)
-    session.clear()
-
     return render_template('main/login.html')
 
 
