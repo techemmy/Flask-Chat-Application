@@ -183,7 +183,7 @@ div .lists li {
 div .lists li:hover {
   cursor: pointer;
 }
-div .lists .active-channel {
+div .lists .active-tab {
   color: rgba(12, 155, 83, 0.863);
 }
 
