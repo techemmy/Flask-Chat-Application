@@ -2,6 +2,7 @@ import unittest
 import os
 from hook import create_app
 from hook.models import db, User
+from passlib.hash import sha256_crypt
 
 TEST_DB = 'test.db'
 
@@ -21,8 +22,6 @@ class AuthenticationTests(unittest.TestCase):
         """ Setup a blank test db before each test """
         global app
         basedir = os.path.abspath(os.path.dirname(__file__))
-        hashed_pass = "$5$rounds=535000$OAFoz.l/V18RuDF6$/LxX2b865VrNPebfihaw5ZCvjzANjH7FrnFvqsPxBt2"
-
         app = create_app({
                          'TESTING': True,
                          'ENV': 'test',
@@ -30,12 +29,19 @@ class AuthenticationTests(unittest.TestCase):
                          os.path.join(basedir, TEST_DB),
                          'USERNAME': 'Test',
                          'PASSWORD': 'password123',
+                         'debug': True
                          })
         self.app = app.test_client()
         app.app_context().push()
         db.create_all()
-        user = User(firstname="Test", lastname="Lase", username="Test",
-                    email="Email@gmail.com", password=hashed_pass, terms=True)
+        hashed_pass = sha256_crypt.hash(app.config['PASSWORD'])
+        user = User(firstname='mock',
+                    lastname='mock',
+                    username=app.config['USERNAME'],
+                    email="mock@gmail.com",
+                    password=hashed_pass,
+                    terms=True
+                    )
         user.save()
 
     def tearDown(self):
@@ -54,7 +60,7 @@ class AuthenticationTests(unittest.TestCase):
         db.session.add(user)
         self.assertIn(user, db.session)
 
-    def login(self, username, password):
+    def _login(self, username, password):
         """ login helper function """
         return self.app.post('/auth/login/',
                              data={'username': username,
@@ -62,33 +68,33 @@ class AuthenticationTests(unittest.TestCase):
                              follow_redirects=True,
                              )
 
-    def logout(self):
+    def _logout(self):
         """ logout helper function """
         return self.app.get('/auth/logout/', follow_redirects=True)
 
     def test_login_logout(self):
         """ test login and logout using helper functions """
-        request = self.login(app.config['USERNAME'],
+        request = self._login(app.config['USERNAME'],
                              app.config['PASSWORD'])
         self.assertIn(b'You are now logged in!', request.data)
-        request = self.logout()
+        request = self._logout()
         self.assertIn(b'You logged out successfully!', request.data)
 
     def test_invalid_login(self):
         """ test invalid login using helper function """
-        request = self.login(app.config['USERNAME'] + 'Y',
-                             app.config['PASSWORD'] + 'Y')
+        request = self._login(app.config['USERNAME'] + ' Y',
+                             app.config['PASSWORD'] + ' Y')
         self.assertIn(b'Check your credentials and try again!', request.data)
 
     def test_login_required_wrapper(self):
         """ test if the login required wrapper works """
-        request = self.logout()
+        request = self._logout()
         self.assertIn(b'You need to login first', request.data)
 
     def test_logout_required_wrapper(self):
-        request = self.login(app.config['USERNAME'],
+        request = self._login(app.config['USERNAME'],
                              app.config['PASSWORD'])
-        request = self.login(app.config['USERNAME'],
+        request = self._login(app.config['USERNAME'],
                              app.config['PASSWORD'])
         self.assertIn(b'You need to logout first.', request.data)
 
