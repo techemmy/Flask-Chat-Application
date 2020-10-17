@@ -7,4 +7,5 @@ script:
   - flake8 hook/__init__.py
   - flake8 hook/models.py
   - flake8 hook/forms.py
+  - flake8 hook/routes/auth.py
   - python -m unittest discover hook/test
