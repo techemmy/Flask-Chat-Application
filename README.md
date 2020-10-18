@@ -11,12 +11,12 @@ javascript uses the javascript socket script to communicate back and forth.</h3>
 
 <h3>To run this code on windows, run the run.sh file or copy and paste it in cmd.</h3>
 
-<code>
+<pre>
 NOTE: Make sure you change the DATABASE_URL to suit your database url,
 	  'username' usually postgres by default
 	  'password' the password set for the db or your master password
 	  'db' for the name of your db
-</code>
+</pre>
 
 <h3>For those running on Mac or Linux, to run this code check the equivalent
 of the commands on google.</h3>
