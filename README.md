@@ -15,7 +15,8 @@ javascript uses the javascript socket script to communicate back and forth.</h3>
 NOTE: Make sure you change the DATABASE_URL to suit your database url,
 	  'username' usually postgres by default
 	  'password' the password set for the db or your master password
-	  'db' for the name of your db
+	  'db' for the name of your db,
+	  and your virtual environment enabled if you use one.
 </pre>
 
 <h3>For those running on Mac or Linux, to run this code check the equivalent
