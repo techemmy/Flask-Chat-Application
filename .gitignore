@@ -6,3 +6,4 @@ env
 flask_session
 hook/test/test.db
 .idea/
+.vscode/
