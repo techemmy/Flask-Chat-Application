@@ -28,67 +28,72 @@ def index():
 
 
 def _process_info(name, n_type):
-    if n_type == 'channel':
-        if not Channel.query.filter_by(channel_name=name).all():
-            new_channel = Channel(name)
-            new_channel.save()
-            return None, new_channel
-        else:
-            return 'Error', 'Channel already exists!'
-    elif n_type == 'DM':
-        try:
-            user_to_add_id = User.query.filter_by(username=name).one().id
-            current_user_id = session.get('user').id
-            exists = Dm.query.filter(or_(
-                            and_(Dm.user_one == user_to_add_id,
-                                 Dm.user_two == current_user_id),
-                            and_(Dm.user_one == current_user_id,
-                                 Dm.user_two == user_to_add_id)
-                    )).first()
-            if exists:
-                # return error
-                print("DM already exists")
-                return 'Error', 'DM already exists!'
+    try:
+        if n_type == 'channel':
+            # checks if channel doesn't exists and adds it to the DB
+            if not Channel.query.filter_by(channel_name=name).all():
+                new_channel = Channel(name)
+                new_channel.save()
+                return None, new_channel
             else:
+                return 'Error', 'Channel already exists!'
+
+        elif n_type == 'DM':
+                # gets user to add as DM objects from DB
+                user_to_add_id = User.query.filter_by(username=name).one().id
+
+                # gets current user id
+                current_user_id = session.get('user').id
+
+                # checks if user to add to DM is valid
                 if user_to_add_id:
-                    # returns object successfully
+                    # creates new DM object and save if no error raised
                     dm = Dm(current_user_id, user_to_add_id)
-                    # dm.save()
                     return None, dm, current_user_id
-        except NoResultFound:
-            return 'Error', 'User doesn\'t exists'
-    else:
-        return None
+        else:
+            return 'Error', 'Invalid Input... Contact Developer for help.'
+
+    except ValueError as e:
+        return 'Error', 'DM already exists!'
+
+    except NoResultFound:
+        return 'Error', 'User doesn\'t exists'
 
 
-@chat.route('/add-new-obj', methods=['POST'])
+@chat.route('add-obj', methods=['POST'])
 def add_new_obj():
     name = request.form.get('name')
     new_type = request.form.get('type')
 
+    # scrutinze name and returns error if name is invalid
+    if name.strip(' ') == '':
+        return jsonify({'success': False, 'error': 'Invalid input.'})
+
+    name = name.strip().replace(' ', '_')
+
     if new_type == 'channel':
-        name = name.strip().replace(' ', '_')
-        if name:
-            new_channel = _process_info(name, new_type)
-            # check for error
-            if new_channel[0] == 'Error':
-                # return error if channel already exists
-                return jsonify({'success': False, 'error': new_channel[1]})
-            # return success
-            return jsonify({'name': new_channel[1].channel_name,
-                            'success': True, 'error': 'null'})
-        else:
-            # return invalid input
-            return jsonify({'success': False, 'error': 'Invalid input.'})
+        new_channel = _process_info(name, new_type)
+
+        # checks for error
+        if new_channel[0] == 'Error':
+            # return error if channel already exists
+            return jsonify({'success': False, 'error': new_channel[1]})
+
+        # return success
+        return jsonify({'name': new_channel[1].channel_name,
+                        'success': True, 'error': 'null'})
     elif new_type == 'DM':
-        name = name.strip().replace(' ', '_')
-        if name:
-            new_dm = _process_info(name, new_type)
-            if new_dm[0] == 'Error':
-                # return handles error
-                return jsonify({'success': False, 'error': new_dm[1]})
-            return jsonify({'name': new_dm[1].get_name(new_dm[2]),
-                            'success': True, 'error': 'null'})
+        new_dm = _process_info(name, new_type)
+
+        # checks for error
+        if new_dm[0] == 'Error':
+            # return error if processing DM wasn't successful
+            return jsonify({'success': False, 'error': new_dm[1]})
+
+        return jsonify({'name': new_dm[1].get_name(new_dm[2]),
+                        'success': True, 'error': 'null'})
+    else:
+        return jsonify({'success': False, 'error': 'Invalid request.Contact Developer for more info.'})
 
 
 # -------------------------------- SOCKETS CODES ------------------------------
@@ -131,7 +136,8 @@ def get_channel_details(data):
             # return details to script
             emit('MessagesDelivered', {"messages": messages,
                  "user": current_user}, room=room)
-        except Exception:
+        except Exception as e:
+            raise e
             emit('Error', {'error': 'Couldn\'t join channel'},
                  broadcast=False)
     else:

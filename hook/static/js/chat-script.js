@@ -14,9 +14,10 @@ document.addEventListener('DOMContentLoaded', () => {
 		localStorage.setItem('username', data.name);
 	});
 
-	if (!(localStorage.getItem('username'))){
-		window.reload();
-	}
+	// if (!(localStorage.getItem('username'))){
+	// 	alert("LogOut and LogIn to fix error.")
+	// 	location.reload();
+	// }
 
 	// load last active channel on page reload
 	if (localStorage.getItem('activeTab')){
@@ -114,8 +115,6 @@ document.addEventListener('DOMContentLoaded', () => {
     		document.querySelector('#add-new-field').dataset.type = type;
     		$('#add-temp').modal('show');
 
-    		console.log(document.querySelector('#add-new-field'));
-
 			document.querySelector('#add-new-form').onsubmit = addNewObject;
     	};
     });
@@ -123,7 +122,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 // ----------------- FUNCTIONS ------------------- //
-
 
 function addListenerMulti(element, eventNames, listener) {
 	// adds multiple events listeners
@@ -143,13 +141,14 @@ function addNewObject(){
 	$('#add-temp').modal('hide');
 	document.querySelector('#add-new-field').value = '';
 
-	request.open('POST', '/chat/add-new-obj');
+	request.open('POST', '/chat/add-obj');
 
 	// callback function on completion of request
 	request.onload = () => {
 
 		// extract json data from response
 		const data = JSON.parse(request.responseText);
+		console.log(data);
 
 		// add channel
 		if (data.success){
@@ -172,7 +171,8 @@ function addNewObject(){
 
 
 function showMessage(data) {
-	 document.querySelector('.msg-gutter').innerHTML = '';
+	const msg_gutter = document.querySelector('.msg-gutter');
+	 msg_gutter.innerHTML = '';
 	 document.querySelector('.active-tab').innerHTML = localStorage.getItem('activeTab');
 	// loop to add message to the message gutter
 	for(i=0; i < data.messages.length; i++){
@@ -201,6 +201,7 @@ function showMessage(data) {
   		let msgName = document.createElement('span');
   		msgName.className = 'msg-name';
   		msgName.innerHTML = `${message[0]}`;
+  		msgName.style.fontWeight = 'bold';
 
   		let msgTime = document.createElement('span');
   		msgTime.className = 'msg-time';
@@ -218,7 +219,8 @@ function showMessage(data) {
   		msgInfo.append(msgCont);
   		msgContainer.append(msgInfo);
 
-  		document.querySelector('.msg-gutter').append(msgContainer);
+  		msg_gutter.append(msgContainer);
+  		msg_gutter.scrollTop = msg_gutter.scrollHeight;
 	}
 };
 
@@ -266,5 +268,8 @@ function broadcastMessage(data){
 	msgInfo.append(msgCont);
 	msgContainer.append(msgInfo);
 
-	document.querySelector('.msg-gutter').append(msgContainer);
+	const msg_gutter = document.querySelector('.msg-gutter');
+
+	msg_gutter.append(msgContainer);
+	msg_gutter.scrollTop = msg_gutter.scrollHeight;
 };

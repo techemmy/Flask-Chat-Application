@@ -121,12 +121,11 @@ class Dm(db.Model):
             db.session.rollback()
 
     def _get_room(self):
-        run = True
-        while run:
+        while True:
             room = os.urandom(16)
-            for dm in Dm.query.all():
-                if room != dm.room:
-                    run = False
+            dm_rooms = [dm.room for dm in Dm.query.all()]
+            if room not in dm_rooms:
+                break
         return room
 
     def get_name(self, present_user_id):
@@ -150,6 +149,5 @@ class Dm(db.Model):
                             and_(Dm.user_one == user2,
                                  Dm.user_two == user1))).all()
         if exists:
-            raise Exception("DM already exists.")
-            return False
+            raise ValueError('DM already exists!oo')
         return True
