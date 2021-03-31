@@ -4,7 +4,6 @@ from hook.routes.auth import login_required
 from flask_socketio import emit, join_room
 from .. import socketio
 from ..models import Channel, User, Message, Dm
-from sqlalchemy.sql.expression import or_, and_
 from sqlalchemy.orm.exc import NoResultFound
 
 
@@ -39,22 +38,22 @@ def _process_info(name, n_type):
                 return 'Error', 'Channel already exists!'
 
         elif n_type == 'DM':
-                # gets user to add as DM objects from DB
-                user_to_add_id = User.query.filter_by(username=name).one().id
+            # gets user to add as DM objects from DB
+            user_to_add_id = User.query.filter_by(username=name).one().id
 
-                # gets current user id
-                current_user_id = session.get('user').id
+            # gets current user id
+            current_user_id = session.get('user').id
 
-                # checks if user to add to DM is valid
-                if user_to_add_id:
-                    # creates new DM object and save if no error raised
-                    dm = Dm(current_user_id, user_to_add_id)
-                    return None, dm, current_user_id
+            # checks if user to add to DM is valid
+            if user_to_add_id:
+                # creates new DM object and save if no error raised
+                dm = Dm(current_user_id, user_to_add_id)
+                return None, dm, current_user_id
         else:
             return 'Error', 'Invalid Input... Contact Developer for help.'
 
     except ValueError as e:
-        return 'Error', 'DM already exists!'
+        return 'Error', e.args[0]
 
     except NoResultFound:
         return 'Error', 'User doesn\'t exists'
@@ -93,7 +92,8 @@ def add_new_obj():
         return jsonify({'name': new_dm[1].get_name(new_dm[2]),
                         'success': True, 'error': 'null'})
     else:
-        return jsonify({'success': False, 'error': 'Invalid request.Contact Developer for more info.'})
+        return jsonify({'success': False, 'error': 'Invalid request.\
+                        Contact Developer for more info.'})
 
 
 # -------------------------------- SOCKETS CODES ------------------------------

@@ -149,5 +149,5 @@ class Dm(db.Model):
                             and_(Dm.user_one == user2,
                                  Dm.user_two == user1))).all()
         if exists:
-            raise ValueError('DM already exists!oo')
+            raise ValueError('DM already exists!')
         return True
