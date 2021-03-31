@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	if (localStorage.getItem('activeTab')){
 		let activeTab = localStorage.getItem('activeTab');
 		let activeId = localStorage.getItem('id')
-		// TODO!possiblities:
+
 		if(activeTab.slice(0,1) === '#'){
 			socket.emit('joinChannel', {'name': activeTab, 'id': activeId});	
 		}else{
@@ -54,7 +54,6 @@ document.addEventListener('DOMContentLoaded', () => {
 			localStorage.setItem('activeTab', name);
 			localStorage.setItem('id', id)
 			localStorage.setItem('dm_room', room)
-			console.log(name, id)
 			socket.emit('joinDM', {'name': name, 'id': id, 'room': room});
 		};
 	});
@@ -148,11 +147,10 @@ function addNewObject(){
 
 		// extract json data from response
 		const data = JSON.parse(request.responseText);
-		console.log(data);
 
 		// add channel
 		if (data.success){
-			const name = `${data.name}`;
+			const name = data.name;
 			console.log(name);
 		} else {
 			alert(data.error);
