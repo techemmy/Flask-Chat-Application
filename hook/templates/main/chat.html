@@ -4,111 +4,111 @@
 
 {% block content %}
 <div>{% include 'main/navbar.html' %}</div>
-<main>
-    <div class="row chat-head">
-        <h2 class="col-sm-10 chat-rep">{{ session.user.username }}</h2>
-        <div class="col-sm-2">
-            <div class="menu-wrap">
-                <button class="menu__button">
-                    +
-                </button>
-                <div class="menu">
-                    <div class="title"></div>
-                    <h4 class="menu__title">Add new</h4>
-                    <ul class="menu__list">
-                        <li>
-                            <span class="icon"></span>
-                            <a class="add-new" data-type="channel">Channel</a>
-                        </li>
-                        <li>
-                            <span class="icon"></span>
-                            <a class="add-new" data-type="DM">Direct Message(DM)</a>
-                        </li>
-                    </ul>
+<div class="fluid-container">
+    <main>
+        <div class="row chat-head">
+            <h2 class="col-sm-10 chat-rep">{{ session.user.username }}</h2>
+            <div class="col-sm-2">
+                <div class="menu-wrap">
+                    <button class="menu__button">
+                        +
+                    </button>
+                    <div class="menu">
+                        <div class="title"></div>
+                        <h4 class="menu__title">Add new</h4>
+                        <ul class="menu__list">
+                            <li>
+                                <span class="icon"></span>
+                                <a class="add-new" data-type="channel">Channel</a>
+                            </li>
+                            <li>
+                                <span class="icon"></span>
+                                <a class="add-new" data-type="DM">Direct Message(DM)</a>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="content row mt-0">
-        <div class="col-sm-4 col-md-4 col-lg-3 lists">
-            <!-- ACTIVE CHANNEL CONTAINER -->
-            <h5 class="active-tab"></h5>
-            <h4 title="Channels" class="heads">Channel(s)</h4>
-            <ul class="channels-list">
-                <!-- LIST OF CHANNELS -->
-                {% if context["channels"] %}
-                    {% for channel in context["channels"] %}
-                    <li class="channel" data-get={{channel.id}}>#{{ channel.channel_name }}</li>
-                    {% endfor %}
-                {% endif %}
-            </ul>
-            <h4 title="Direct Messages" class="heads">Direct Message(s) (DM)</h4>
-            <ul class="dm-list">
-                <!-- LIST OF DM -->
-                {% if context["dms"] %}
-                    {% for dm in context["dms"] %}
-                    <li class="dm" data-get={{dm[0]}} data-get={{dm[1]}} data-room={{dm[2]}}>{{ dm[1] }}</li>
-                    {% endfor %}
-                {% endif %}
-            </ul>
-        </div>
-        <div class="col-sm-8 col-md-8 col-lg-9 msgs-content">
-            <div class="msg-space row">
-                <div class="msg-gutter row">
-                    <!-- MESSAGES GUTTER -->
-<!--                    <div class="msg-container">
-                        <div class="msg-info">
-                            <div class="msg-pic"><img src="{{ url_for('static', filename='assets/msg-img.png') }}" alt="user-image" class="msg-img"></div>
-                            <div class="msg-cont">
-                                <span class="msg-name">name</span>
-                                <span class="msg-time">time</span>
-                                <p class="msg-msg">message</p>
+        <div class="content row mt-0">
+            <div class="col-sm-4 col-md-4 col-lg-3 lists">
+                <!-- ACTIVE CHANNEL CONTAINER -->
+                <h5 class="active-tab"></h5>
+                <h4 title="Channels" class="heads">Channel(s)</h4>
+                <ul class="channels-list">
+                    <!-- LIST OF CHANNELS -->
+                    {% if context["channels"] %}
+                        {% for channel in context["channels"] %}
+                        <li class="channel" data-get={{channel.id}}>#{{ channel.channel_name }}</li>
+                        {% endfor %}
+                    {% endif %}
+                </ul>
+                <h4 title="Direct Messages" class="heads">Direct Message(s) (DM)</h4>
+                <ul class="dm-list">
+                    <!-- LIST OF DM -->
+                    {% if context["dms"] %}
+                        {% for dm in context["dms"] %}
+                        <li class="dm" data-get={{dm[0]}} data-get={{dm[1]}} data-room={{dm[2]}}>{{ dm[1] }}</li>
+                        {% endfor %}
+                    {% endif %}
+                </ul>
+            </div>
+            <div class="col-sm-8 col-md-8 col-lg-9 msgs-content">
+                <div class="msg-space row">
+                    <div class="msg-gutter row">
+                        <!-- MESSAGES GUTTER -->
+    <!--                    <div class="msg-container">
+                            <div class="msg-info">
+                                <div class="msg-pic"><img src="{{ url_for('static', filename='assets/msg-img.png') }}" alt="user-image" class="msg-img"></div>
+                                <div class="msg-cont">
+                                    <span class="msg-name">name</span>
+                                    <span class="msg-time">time</span>
+                                    <p class="msg-msg">message</p>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="msg-container" style="justify-content: flex-end;">
-                        <div class="msg-info">
-                            <div class="msg-pic"><img src="{{ url_for('static', filename='assets/msg-img.png') }}" alt="user-image" class="msg-img"></div>
-                            <div class="msg-cont">
-                                <span class="msg-name">name</span>
-                                <span class="msg-time">time</span>
-                                <p class="msg-msg">message</p>
+                        <div class="msg-container" style="justify-content: flex-end;">
+                            <div class="msg-info">
+                                <div class="msg-pic"><img src="{{ url_for('static', filename='assets/msg-img.png') }}" alt="user-image" class="msg-img"></div>
+                                <div class="msg-cont">
+                                    <span class="msg-name">name</span>
+                                    <span class="msg-time">time</span>
+                                    <p class="msg-msg">message</p>
+                                </div>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
- -->
-                </div>
-                <div class="send-space row">
-                    <input type="text" name="message" class="form-control col-sm-10" id="send-message">
-                    <a id="send_btn" tabindex=0><img src="{{ url_for('static', filename='assets/send-img.png') }}" alt="send" class="send-img"></a>
+                    <div class="send-space row">
+                        <input type="text" name="message" class="form-control col-sm-10" id="send-message">
+                        <a id="send_btn" tabindex=0><img src="{{ url_for('static', filename='assets/send-img.png') }}" alt="send" class="send-img"></a>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-</main>
-
-
-<div class="modal" id="add-temp" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="static", data-keyboard="false">
-    <div class="modal-dialog modal-dialog-scrollable">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title"><!-- New-title --></h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form class="row m-3" id="add-new-form", method="post">
-                    <input type="text" class="form-control col-sm-12 m-1" id="add-new-field" style="outline: solid;" />
-                    <button class="btn btn-outline-success col-sm-12 m-1">Add</button>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            </div>
-        </div>
-    </div>
+    </main>
 </div>
+
+    <div class="modal" id="add-temp" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="static", data-keyboard="false">
+        <div class="modal-dialog modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title"><!-- New-title --></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form class="row m-3" id="add-new-form", method="post">
+                        <input type="text" class="form-control col-sm-12 m-1" id="add-new-field" style="outline: solid;" />
+                        <button class="btn btn-outline-success col-sm-12 m-1">Add</button>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
 <!-- Socket Script -->
 <script src="//cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js" integrity="sha256-yr4fRk/GU1ehYJPAs8P4JlTgu0Hdsp4ZKrx8bDEDC3I=" crossorigin="anonymous"></script>
