@@ -12,6 +12,9 @@ body {
   overflow-x: hidden;
   height: 100vh;
   width: 100vw;
+}
+
+.fluid-container {
   background-color: rgba(0, 0, 0, 0.8);
 }
 
@@ -28,7 +31,7 @@ body {
 nav .navbar-brand {
   transition: color 0.2s ease-out;
   cursor: pointer;
-  color: white;
+  color: rgba(12, 155, 83, 0.863) !important;
   font-size: xx-large;
 }
 nav .navbar-brand:hover {
@@ -234,20 +237,12 @@ div.msgs-content .msg-space .msg-gutter .msg-container .msg-info {
   border: 1px solid rgba(0, 0, 0, 0.8);
   border-radius: 5px;
   margin: 5px;
-  height: 100px;
   width: 300px;
-  display: -webkit-box;
-}
-div.msgs-content .msg-space .msg-gutter .msg-container .msg-info .msg-pic {
-  margin-right: 10px;
+  height: fit-content;
 }
 div.msgs-content .msg-space .msg-gutter .msg-container .msg-info .msg-pic img.msg-img {
-  margin-top: 10px;
   width: 30px;
   height: 30px;
-}
-div.msgs-content .msg-space .msg-gutter .msg-container .msg-info .msg-cont {
-  padding: 3px;
 }
 div.msgs-content .msg-space .send-space {
   width: 100%;
