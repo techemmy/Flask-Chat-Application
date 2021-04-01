@@ -20,9 +20,7 @@ def create_app(test_config=None, debug=False):
     app.config.from_mapping(
         SESSION_PERMANENT=False,
         SESSION_TYPE="filesystem",
-        SQLALCHEMY_DATABASE_URI=os.getenv('DATABASE_URL').replace(
-            "://", "ql://", 1
-            ),
+        SQLALCHEMY_DATABASE_URI=os.getenv('DATABASE_URL'),
         SQLALCHEMY_TRACK_MODIFICATIONS=False,
         SECRET_KEY=SECRET_KEY,
         debug=debug
