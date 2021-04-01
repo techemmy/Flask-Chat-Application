@@ -1,7 +1,7 @@
 from hook import create_app, socketio
 from hook.models import User, Channel, Message, Dm, db
 
-app = create_app(debug=True)
+app = create_app(debug=False)
 
 
 @app.shell_context_processor
