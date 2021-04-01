@@ -63,15 +63,11 @@ div.img-box {
   }
 }
 
-div.chat-head {
-  margin: 0;
-  .chat-rep {
-    color: $white;
-    margin-top: 20px;
-    padding-left: 30px;
-    &:hover {
-      cursor: default;
-    }
+.chat-rep {
+  color: $white;
+  margin-right: 5px;
+  &:hover {
+    cursor: default;
   }
 }
 
@@ -182,9 +178,6 @@ button.menu__button {
   margin: 0;
 }
 
-div.lists, div.msgs-content {
-}
-
 div {
   .lists {
     color: $white;
@@ -266,9 +259,9 @@ div.msgs-content {
     }
     .send-space {
       width: 100%;
-      position: absolute;
+      position: relative;
       bottom: 0;
-      padding: 10px;
+      // padding: 10px;
       margin: 0;
       textarea,
       button {

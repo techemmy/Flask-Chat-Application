@@ -54,15 +54,11 @@ div.img-box img {
   height: 500px;
 }
 
-div.chat-head {
-  margin: 0;
-}
-div.chat-head .chat-rep {
+.chat-rep {
   color: white;
-  margin-top: 20px;
-  padding-left: 30px;
+  margin-right: 5px;
 }
-div.chat-head .chat-rep:hover {
+.chat-rep:hover {
   cursor: default;
 }
 
@@ -246,9 +242,8 @@ div.msgs-content .msg-space .msg-gutter .msg-container .msg-info .msg-pic img.ms
 }
 div.msgs-content .msg-space .send-space {
   width: 100%;
-  position: absolute;
+  position: relative;
   bottom: 0;
-  padding: 10px;
   margin: 0;
 }
 div.msgs-content .msg-space .send-space textarea,
