@@ -1,7 +1,7 @@
 __pycache__
 hook/__pycache__
 hook/routes/__pycache__
-env
+venv/
 .env
 flask_session
 hook/test/test.db
