@@ -59,17 +59,27 @@ document.addEventListener('DOMContentLoaded', () => {
 	});
 
 	// send message
-	const msg_box = document.querySelector('#send-message');
+	const msg_box = document.querySelector('input#send-message');
 	const send_btn = document.querySelector('#send_btn');
-	msg_box.onkeyup = () => {
-		if(((msg_box.value).trim()).length > 0){
-			send_btn.style.visibility = 'visible';
-		}else{
-			send_btn.style.visibility = 'hidden';
+	const emoji_trigger = document.querySelector('#emoji-trigger');
+	const emoji_picker = document.querySelector('emoji-picker');
+	const emoji_box = document.querySelector('.emoji-box');
+
+	emoji_trigger.onclick = () => {
+		console.log()
+		if (emoji_box.style.display === 'none'){
+			emoji_box.style.display = 'block';
+		}else {
+			emoji_box.style.display = 'none';
 		}
-	};
+	}
+
+	emoji_picker.addEventListener('emoji-click', (event) => {
+			msg_box.value += event.detail.unicode;
+		});
+	
+
 	addListenerMulti(send_btn, "click keydown", () => {
-		send_btn.style.visibility = 'hidden';
 		const msg = msg_box.value;
 		msg_box.value = '';
 		// to ensure message is not an empty string

@@ -75,9 +75,14 @@
                             </div>
                         </div> -->
                     </div>
-                    <div class="send-space row">
-                        <input type="text" name="message" class="form-control col-sm-9" id="send-message">
-                        <a id="send_btn" tabindex=0><img src="{{ url_for('static', filename='assets/send-img.png') }}" alt="send" class="send-img"></a>
+                    <emoji-picker style="position:absolute;" class="emoji-box"></emoji-picker>
+                    <div class="send-space row mb-2">
+                        <div class="input-group-prepend mb-1 col-sm-1" id="emoji-trigger">
+                            <span class="input-group-text">&#128512;</span>
+                        </div>
+                        <input type="text" name="message" class="form-control col-sm-8" id="send-message" placeholder="Enter message..." aria-label="Message" aria-describedby="emoji-picker">
+                        <!-- <input type="text" name="message" class="form-control col-sm-8" id="send-message" /> -->
+                        <a id="send_btn" tabindex=0 class="col-sm-2"><img src="{{ url_for('static', filename='assets/send-img.png') }}" alt="send" class="send-img"></a>
                     </div>
                 </div>
             </div>
@@ -109,6 +114,6 @@
 
 <!-- Socket Script -->
 <script src="//cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js" integrity="sha256-yr4fRk/GU1ehYJPAs8P4JlTgu0Hdsp4ZKrx8bDEDC3I=" crossorigin="anonymous"></script>
-
+<script type="module" src="https://cdn.jsdelivr.net/npm/emoji-picker-element@^1/index.js"></script>
 {% endblock %}
 

@@ -214,9 +214,6 @@ div.msgs-content {
 div.msgs-content .msg-space {
   background: white;
 }
-div.msgs-content .msg-space #send_btn {
-  visibility: hidden;
-}
 div.msgs-content .msg-space .msg-gutter {
   width: 100%;
   overflow: auto;
@@ -251,6 +248,9 @@ div.msgs-content .msg-space .send-space button {
   margin: 5px;
   border: 0;
 }
+div.msgs-content .msg-space .send-space #emoji-trigger {
+  cursor: pointer;
+}
 div.msgs-content .msg-space .send-space input[type=text] {
   height: 50px;
   margin: 0 0 5px 20px;
@@ -269,6 +269,9 @@ div.msgs-content .msg-space .send-space a img.send-img {
 }
 div.msgs-content .msg-space .send-space a img.send-img:hover, div.msgs-content .msg-space .send-space a img.send-img:focus {
   border: 1px solid white;
+}
+div.msgs-content .msg-space .emoji-box {
+  display: none;
 }
 
 /*# sourceMappingURL=styles.css.map */
