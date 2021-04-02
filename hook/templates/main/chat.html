@@ -81,8 +81,9 @@
                             <span class="input-group-text">&#128512;</span>
                         </div>
                         <input type="text" name="message" class="form-control col-sm-8" id="send-message" placeholder="Enter message..." aria-label="Message" aria-describedby="emoji-picker">
-                        <!-- <input type="text" name="message" class="form-control col-sm-8" id="send-message" /> -->
-                        <a id="send_btn" tabindex=0 class="col-sm-2"><img src="{{ url_for('static', filename='assets/send-img.png') }}" alt="send" class="send-img"></a>
+                        <a id="send_btn" tabindex=0 class="col-sm-2">
+                            <img src="{{ url_for('static', filename='assets/send-img.png') }}" alt="send" class="send-img">
+                        </a>
                     </div>
                 </div>
             </div>

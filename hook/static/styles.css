@@ -272,6 +272,7 @@ div.msgs-content .msg-space .send-space a img.send-img:hover, div.msgs-content .
 }
 div.msgs-content .msg-space .emoji-box {
   display: none;
+  transition: all 2s ease 0.5s;
 }
 
 /*# sourceMappingURL=styles.css.map */

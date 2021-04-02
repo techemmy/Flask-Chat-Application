@@ -289,6 +289,7 @@ div.msgs-content {
     }
     .emoji-box {
       display: none;
+      transition: all 2s ease .5s;
     }
   }
 }
