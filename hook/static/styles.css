@@ -251,9 +251,12 @@ div.msgs-content .msg-space .send-space button {
 div.msgs-content .msg-space .send-space #emoji-trigger {
   cursor: pointer;
 }
+div.msgs-content .msg-space .send-space #emoji-trigger span {
+  font-size: 1.4rem;
+}
 div.msgs-content .msg-space .send-space input[type=text] {
   height: 50px;
-  margin: 0 0 5px 20px;
+  margin: 0 0 4px 20px;
   width: 100%;
 }
 div.msgs-content .msg-space .send-space a {

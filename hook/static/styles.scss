@@ -266,10 +266,13 @@ div.msgs-content {
       }
       #emoji-trigger {
         cursor: pointer;
+        span {
+          font-size: 1.4rem;
+        }
       }
       input[type=text] {
         height: 50px;
-        margin: 0 0 5px 20px;
+        margin: 0 0 4px 20px;
         width: 100%;
       }
       a {
