@@ -9,4 +9,4 @@ script:
   - flake8 hook/forms.py
   - flake8 hook/routes/auth.py
   - flake8 hook/routes/chat.py
-  - python -m unittest discover hook/test
+  - flask test
