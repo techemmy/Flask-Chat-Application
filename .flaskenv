@@ -1,2 +1,2 @@
 FLASK_ENV=development
-FLASK_APP=hook
+FLASK_APP=run.py
