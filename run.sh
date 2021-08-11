@@ -1,1 +1,1 @@
-python chat.py
+python run.py
