@@ -4,59 +4,67 @@
 
 {% block content %}
 
-{% include 'main/navbar.html' %}
+<nav class="navbar navbar-dark bg-dark">
+    <a class="navbar-brand" href="{{ url_for('index') }}">Hook</a>
+    <a href="https://github.com/techemmy/Flask-Chat-Application" target="_blank"><button type="button" class="btn btn-outline-light btn-lg m-1">View Code</button></a>
+</nav>
 
-<div class="img-box">
-    <img src="{{ url_for('static', filename='assets/hook1.png') }}" class="img-fluid" alt="Responsive image">
-</div>
+<div class="home-container">
+    <div class="img-box">
+        <img src="{{ url_for('static', filename='assets/home-pic.svg') }}" alt="Responsive image">
+    </div>
+    <div class="auth-btn form-inline p-2">
+        <a href="{{ url_for('auth.login') }}"><button type="button" class="btn btn-success btn-lg m-1" id="login_btn">Log In</button></a>
+        <button type="button" class="btn btn-outline-success btn-lg m-1 signup" data-toggle="modal" data-target="#signup" id="signup_btn">Sign Up</button>
+    </div>
 
-<div class="modal" id="signup" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="static", data-keyboard="false">
-    <div class="modal-dialog modal-dialog-scrollable">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Sign Up</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            {% with messages = get_flashed_messages() %}
-                {% if messages %}
-                    {% for message in messages %}
-                    <div class="alert alert-warning alert-dismissible fade show text-center" role="alert">
-                            {{ message }}
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                
-                    {% endfor %}
-                {% endif %}
-            {% endwith %}
-            <div class="modal-body ml-3">
-                {% from "main/_formhelpers.html" import render_field %}
-                <form action="{{ url_for('auth.sign_up') }}" method="POST" class="sign-up-form">
-                    <dl class="form-group">
-                        {{form.csrf_token}}
-                        {{render_field(form.firstname)}}
-                        {{render_field(form.lastname)}}
-                        {{render_field(form.username)}}
-                        {{render_field(form.email)}}
-                        {{render_field(form.password)}}
-                        {{render_field(form.confirm)}}
-                        {{render_field(form.tos)}}
-                    </dl>                            
-                    <p><input type="submit" value="Register" class="btn btn-primary"></p>
-                    {% if error %}
-                        <p class="error"><strong>Error: </strong>error</p>
+    <div class="modal" id="signup-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="static", data-keyboard="false">
+        <div class="modal-dialog modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Sign Up</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                {% with messages = get_flashed_messages() %}
+                    {% if messages %}
+                        {% for message in messages %}
+                        <div class="alert alert-warning alert-dismissible fade show text-center" role="alert">
+                                {{ message }}
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    
+                        {% endfor %}
                     {% endif %}
-                </form>
-                <p>Have an account already? <a href="{{ url_for('auth.login') }}">Log in</a> now</p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                {% endwith %}
+                <div class="modal-body ml-3">
+                    {% from "main/_formhelpers.html" import render_field %}
+                    <form action="{{ url_for('auth.sign_up') }}" method="POST" class="sign-up-form">
+                        <dl class="form-group">
+                            {{form.csrf_token}}
+                            {{render_field(form.firstname)}}
+                            {{render_field(form.lastname)}}
+                            {{render_field(form.username)}}
+                            {{render_field(form.email)}}
+                            {{render_field(form.password)}}
+                            {{render_field(form.confirm)}}
+                            {{render_field(form.tos)}}
+                        </dl>                            
+                        <p><input type="submit" value="Register" class="btn btn-primary"></p>
+                        {% if error %}
+                            <p class="error"><strong>Error: </strong>error</p>
+                        {% endif %}
+                    </form>
+                    <p>Have an account already? <a href="{{ url_for('auth.login') }}">Log in</a> now</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
             </div>
         </div>
     </div>
 </div>
-
 {% endblock %}
