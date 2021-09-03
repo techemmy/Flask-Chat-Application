@@ -1,5 +1,5 @@
 
-$fonts: system-ui;
+$fonts: 'Balsamiq Sans';
 $primary-color: rgba(12, 155, 83, 0.863);
 $secondary-color: rgba(0, 0, 0, 0.8);
 $white: white;
@@ -17,22 +17,12 @@ body {
   font-family: $fonts, sans-serif;
   box-sizing: border-box;
   overflow-x: hidden;
-  height: 100vh;
-  width: 100vw;
+  height: 100%;
+  width: 100%;
 }
 
 .fluid-container {
   background-color: $secondary-color;
-}
-
-.btn-outline-success {
-  color: $primary-color;
-  border-color: $primary-color;
-}
-
-.btn-outline-success:hover {
-  background-color: $primary-color;
-  border-color: $primary-color;
 }
 
 nav {
@@ -41,6 +31,8 @@ nav {
     cursor: pointer;
     color: $primary-color !important;
     font-size: xx-large;
+    text-transform: uppercase;
+    font-weight: bold;
   }
   .navbar-brand:hover {
     color: $primary-color;
@@ -59,8 +51,15 @@ div.img-box {
   justify-content: center;
   align-items: center;
   img {
-    height: 500px;
+    max-width: 65%;
+    margin-top: 2.4em;
   }
+}
+
+.auth-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .chat-rep {
@@ -225,14 +224,15 @@ h4.heads {
 
 
 div.msgs-content {
-  padding-bottom: 70px;
+  padding-bottom: 5%;
   width: 100%;
   .msg-space {
     background: $white;
+    margin: auto;
     .msg-gutter {
       width: 100%;
       overflow: auto;
-      margin: 20px 40px 20px 20px;
+      margin: 20px 20px 20px 20px;
       height: 400px;
       .msg-container{
         display: flex;
