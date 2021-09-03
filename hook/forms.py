@@ -13,7 +13,7 @@ class SignUpForm(FlaskForm):
     email = StringField('Email:', validators=[DataRequired(),
                                               Length(min=2, max=30)])
     password = PasswordField('Password:', validators=[DataRequired(),
-                                                      Length(min=5, max=25),
+                                                      Length(min=5, max=60),
                                                       EqualTo('confirm',
                                                       message="Passwords \
                                                       must match.")]
@@ -21,3 +21,9 @@ class SignUpForm(FlaskForm):
     confirm = PasswordField('Repeat Password:')
     tos = BooleanField('I accept the terms and conditions that apply to this \
                         application.', validators=[DataRequired()])
+
+class LoginForm(FlaskForm):
+    username = StringField('Username:', validators=[DataRequired(),
+                                                    Length(min=2, max=10)])
+    password = PasswordField('Password:', validators=[DataRequired(),
+                                                      Length(min=5, max=50)])
