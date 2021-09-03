@@ -43,8 +43,9 @@ div.img-box {
   align-items: center;
 }
 div.img-box img {
-  max-width: 65%;
-  margin-top: 2.4em;
+  max-width: 50%;
+  margin-top: 5em;
+  margin-bottom: 5em;
 }
 
 .auth-btn {
