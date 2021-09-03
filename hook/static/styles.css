@@ -41,6 +41,7 @@ div.img-box {
   display: flex;
   justify-content: center;
   align-items: center;
+  width: 100%;
 }
 div.img-box img {
   max-width: 50%;
