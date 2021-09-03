@@ -1,6 +1,18 @@
-console.log("Javascript (chat-script) connected.")
+// The script contains everything related to the chat page.
 
 document.addEventListener('DOMContentLoaded', () => {
+	// selects button that triggers menu to add channel/dm
+	let menuButton = document.querySelector(".menu__button");
+	let menuWrap = document.querySelector(".menu-wrap");
+
+	menuButton.addEventListener("click", () => {
+	    toggleMenu();
+	});
+
+	let toggleMenu = () => {
+	    menuWrap.classList.toggle("open");
+	};
+
 	// Connect to Websocket
 	var socket = io.connect(location.protocol + '//' + document.domain + ':' + location.port + '/chat');
 
