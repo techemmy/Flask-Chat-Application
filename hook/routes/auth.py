@@ -37,7 +37,7 @@ def logout_required(f):
     return wrapped_view
 
 
-@auth.route('sign-up/', methods=['POST', 'GET'])
+@auth.route('sign-up', methods=['POST'])
 @logout_required
 def sign_up():
     """ registers user on post request """
@@ -74,12 +74,11 @@ def sign_up():
                 flash("Username already exists.")
         except Exception as e:
             print(e)
-            raise e
             return redirect(url_for('index'))
-    return render_template('main/home.html', form=form)
+    return redirect(url_for('index'))
 
 
-@auth.route('login/', methods=['POST', 'GET'])
+@auth.route('login', methods=['POST'])
 @logout_required
 def login():
     """ verify if user exists in the database """
@@ -102,7 +101,7 @@ def login():
                 return redirect(url_for('auth.login'))
         except Exception:
             flash('Check your credentials and try again!')
-    return render_template('main/login.html')
+    return redirect(url_for('index'))
 
 
 @auth.route("logout/")
