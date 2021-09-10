@@ -45,6 +45,11 @@ def create_app(test_config=None, debug=False):
         return render_template('main/home.html', signup_form=signup_form,
             login_form=login_form)
 
+    @app.errorhandler(505)
+    def internal_server_error():
+        flash("Error")
+        return redirect(url_for('index'))
+
     from hook.routes.auth import auth
     app.register_blueprint(auth, url_prefix='/auth/')
 
