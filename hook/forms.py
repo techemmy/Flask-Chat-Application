@@ -19,8 +19,8 @@ class SignUpForm(FlaskForm):
                                                       must match.")]
                              )
     confirm = PasswordField('Repeat Password:')
-    tos = BooleanField('I accept the terms and conditions that apply to this \
-                        application.', validators=[DataRequired()])
+    tos = BooleanField('I accept the terms and conditions.',
+                                validators=[DataRequired()])
 
 class LoginForm(FlaskForm):
     username = StringField('Username:', validators=[DataRequired(),
