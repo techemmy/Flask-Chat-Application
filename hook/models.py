@@ -136,7 +136,7 @@ class Dm(db.Model):
                 if i.id != present_user_id:
                     other_user = i.username
 
-            return other_user if other_user else None
+                    return other_user if other_user else None
         except Exception as e:
             raise e
 
