@@ -132,11 +132,12 @@ class Dm(db.Model):
         try:
             users = [User.query.get(self.user_one),
                      User.query.get(self.user_two)]
+            other_user = ''
             for i in users:
                 if i.id != present_user_id:
                     other_user = i.username
 
-                    return other_user if other_user else None
+            return other_user
         except Exception as e:
             raise e
 
