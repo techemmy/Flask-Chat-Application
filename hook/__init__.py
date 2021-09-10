@@ -3,7 +3,7 @@ from flask import (Flask, render_template, url_for,
 import os
 from flask_session import Session
 from hook.models import db
-from hook.forms import SignUpForm
+from hook.forms import SignUpForm, LoginForm
 from flask_socketio import SocketIO
 
 socketio = SocketIO()
@@ -40,8 +40,10 @@ def create_app(test_config=None, debug=False):
         # if user not in session, form pop's up
         if session.get('user'):
             return redirect(url_for('chat.index'))
-        form = SignUpForm()
-        return render_template('main/home.html', form=form)
+        signup_form = SignUpForm()
+        login_form = LoginForm()
+        return render_template('main/home.html', signup_form=signup_form,
+            login_form=login_form)
 
     from hook.routes.auth import auth
     app.register_blueprint(auth, url_prefix='/auth/')
