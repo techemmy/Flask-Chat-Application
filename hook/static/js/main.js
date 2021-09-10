@@ -1,6 +1,6 @@
 
 window.onload = () => {
-    $('#signup').modal('show');
+    $('#login-modal').modal('show');
 }
 var signUpBtn = document.querySelector('#signup-btn');
 var loginBtn = document.querySelector('#login-btn')
