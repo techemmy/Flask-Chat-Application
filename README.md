@@ -1,10 +1,10 @@
 # Hook
-<h1>A Flask chat application that uses sockets with python and javascript.<h2>
+<h1>A Flask chat application that uses sockets with python and javascript.<h1>
 
-<h3>This full stack application uses only flask | Python on the backend, 
-Javascript for front-end and interactiveness. </h3>
+<p>This full stack application uses only flask | Python on the backend, 
+Javascript for front-end and interactiveness. </p>
 
-<h3>It uses Postgresql on the backend using flask-sqlalchemy.</h3>
+<p>It uses Postgresql on the backend using flask-sqlalchemy.</p>
 
 <h3>It uses flask_socketio to communicate with javascript as well as the
 javascript uses the javascript socket script to communicate back and forth.</h3>
