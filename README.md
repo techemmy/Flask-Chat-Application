@@ -6,10 +6,10 @@ Javascript for front-end and interactiveness. </p>
 
 <p>It uses Postgresql on the backend using flask-sqlalchemy.</p>
 
-<h3>It uses flask_socketio to communicate with javascript as well as the
-javascript uses the javascript socket script to communicate back and forth.</h3>
+<p>It uses flask_socketio to communicate with javascript as well as the
+javascript uses the javascript socket script to communicate back and forth.</p>
 
-<h3>To run this code on windows, run the run.sh file or copy and paste it in cmd.</h3>
+<p>To run this code on windows, run the run.sh file or copy and paste it in cmd.</p>
 
 <pre>
 NOTE: Make sure you change the DATABASE_URL to suit your database url,
