@@ -4,7 +4,7 @@ hook/routes/__pycache__
 venv/
 .env
 flask_session
-hook/test/test.db
+test/test.db
 .idea/
 .vscode/
 data-dev.sqlite
