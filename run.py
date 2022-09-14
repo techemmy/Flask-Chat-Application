@@ -1,7 +1,9 @@
 import os
+
 from dotenv import load_dotenv
+
 from hook import create_app, socketio
-from hook.models import User, Channel, Message, Dm, db
+from hook.models import Channel, Dm, Message, User, db
 
 app = create_app(debug=False)
 
