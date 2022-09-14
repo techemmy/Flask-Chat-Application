@@ -1,10 +1,11 @@
-from flask import (Flask, render_template, url_for,
-                   redirect, session)
 import os
+
+from flask import Flask, redirect, render_template, session, url_for
 from flask_session import Session
-from hook.models import db
-from hook.forms import SignUpForm, LoginForm
 from flask_socketio import SocketIO
+
+from hook.forms import LoginForm, SignUpForm
+from hook.models import db
 
 socketio = SocketIO()
 
@@ -20,7 +21,8 @@ def create_app(test_config=None, debug=False):
     app.config.from_mapping(
         SESSION_PERMANENT=False,
         SESSION_TYPE="filesystem",
-        SQLALCHEMY_DATABASE_URI=os.getenv('DATABASE_URL'),
+        SQLALCHEMY_DATABASE_URI=os.getenv('DATABASE_URL') or \
+            'sqlite:///' + os.path.join(os.path.abspath('.'), 'data-dev.sqlite'),
         SQLALCHEMY_TRACK_MODIFICATIONS=False,
         SECRET_KEY=SECRET_KEY,
         debug=debug
