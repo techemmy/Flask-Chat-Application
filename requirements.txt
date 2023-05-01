@@ -3,7 +3,7 @@ cachelib==0.1.1
 cffi==1.14.5
 click==7.1.2
 flake8==3.9.0
-Flask==1.1.2
+Flask==2.3.2
 Flask-Session==0.3.2
 Flask-SocketIO==4.3.0
 Flask-SQLAlchemy==2.5.1
